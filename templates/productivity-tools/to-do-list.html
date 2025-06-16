@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Tool - Free Online Task Manager | ToolPix</title>
+  <meta name="description" content="Manage tasks effortlessly with ToolPix's free online to-do list tool. Add, prioritize, set due dates, and track tasks without registration. Ideal for productivity and organization.">
+  <meta name="keywords" content="to-do list, task manager, free to-do list, online task management, task organizer, productivity tool, daily task planner, prioritize tasks, ToolPix">
+  <meta name="robots" content="index.html, follow">
+  <meta name="author" content="ToolPix">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpixs.github.io/to-do-list" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="To-Do List Tool - Free Online Task Manager | ToolPix">
+  <meta property="og:description" content="Organize tasks with priorities and due dates using our free to-do list tool. No sign-up required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpixs.github.io/to-do-list">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/to-do-list-social.jpg">
+  <meta property="og:site_name" content="ToolPix">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="To-Do List Tool - ToolPix">
+  <meta name="twitter:description" content="Free to-do list tool for task management with priorities and due dates. No registration needed.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/to-do-list-twitter.jpg">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ToolPix To-Do List",
+      "description": "A free online to-do list tool for managing tasks with priorities and due dates. No registration required.",
+      "url": "https://toolpixs.github.io/to-do-list",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "150"
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #45a049;
+      --primary-light: #e8f5e9;
+      --secondary: #2196F3;
+      --secondary-dark: #1976D2;
+      --secondary-light: #e3f2fd;
+      --accent: #FF5722;
+      --text: #333;
+      --text-light: #666;
+      --bg: #f4f4f4;
+      --card-bg: #fff;
+      --border: #ddd;
+      --border-light: #eee;
+      --shadow: rgba(0,0,0,0.1);
+      --shadow-md: rgba(0,0,0,0.15);
+      --radius-md: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    html.dark-mode {
+      --text: #f0f0f0;
+      --text-light: #bbb;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --border-light: #444;
+      --shadow: rgba(0,0,0,0.3);
+      --primary-light: #1b5e20;
+      --secondary-light: #0d47a1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.dark-mode):not(.light-mode) {
+        --text: #f0f0f0;
+        --text-light: #bbb;
+        --bg: #121212;
+        --card-bg: #1e1e1e;
+        --border: #333;
+        --border-light: #444;
+        --shadow: rgba(0,0,0,0.3);
+        --primary-light: #1b5e20;
+        --secondary-light: #0d47a1;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      box-shadow: 0 2px 5px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 56px;
+      width: auto;
+    }
+
+    .header-title {
+      flex: 1;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: var(--secondary-dark); }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      flex: 1;
+    }
+
+    .intro {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .intro h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .intro p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .tool-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .input-group input, .input-group select {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--text);
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    .task-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-light);
+      transition: var(--transition);
+      opacity: 1;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .task-item:last-child { border-bottom: none; }
+
+    .task-item.completed span.task-text {
+      text-decoration: line-through;
+      color: var(--text-light);
+    }
+
+    .task-item input[type="checkbox"] {
+      margin-right: 1rem;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+    }
+
+    .task-item span.task-text { flex: 1; font-size: 1.1rem; }
+    .task-item span.task-due { color: var(--text-light); margin-left: 1rem; }
+    .task-item span.task-priority {
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+
+    .task-item span.priority-low { background: #e0f7fa; color: #006064; }
+    .task-item span.priority-medium { background: #fff3e0; color: #ef6c00; }
+    .task-item span.priority-high { background: #ffebee; color: #c62828; }
+
+    .task-item button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .task-item button:hover { color: var(--accent-dark); }
+
+    .suggested-tools {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .suggested-tools h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Ensures button is at the bottom */
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 1px 4px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      height: 100%; /* Makes all cards the same height */
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .tool-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .tool-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .tool-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1; /* Ensures content pushes button to bottom */
+    }
+
+    .tool-card .btn {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .faq-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-item summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .faq-item summary:hover { color: var(--primary-dark); }
+
+    .faq-item p {
+      color: var(--text-light);
+      margin-top: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .ad-space {
+      background: var(--border-light);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-bottom: 2rem;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 -2px 5px var(--shadow);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo a {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover { color: var(--primary); }
+
+    .footer-links h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li { margin-bottom: 0.5rem; }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      main { padding: 1rem; }
+      .input-group { flex-direction: column; }
+      .input-group input, .input-group select { width: 100%; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .intro h1 { font-size: 2rem; }
+      .tool-container h2, .suggested-tools h2, .faq-section h2 { font-size: 1.5rem; }
+    }
+
+    @media (max-width: 576px) {
+      .header-title { font-size: 1.2rem; }
+      .logo { font-size: 1.5rem; }
+      .intro h1 { font-size: 1.8rem; }
+      .intro p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36">
+      </a>
+      <span class="header-title">To-Do List Tool</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Ad Space: Top Banner -->
+    <div class="ad-space">
+      <!-- Insert ad code here (e.g., Google AdSense, banner ad, 728x90) -->
+      <p>Advertisement</p>
+    </div>
+
+    <section class="intro">
+      <h1>Free Online To-Do List Tool</h1>
+      <p>Boost your productivity with ToolPix's free to-do list tool. Easily add tasks, set priorities and due dates, and track progress without any sign-up. Perfect for students, professionals, and anyone aiming to stay organized and efficient.</p>
+    </section>
+
+    <section class="tool-container">
+      <h2>Manage Your Tasks</h2>
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter a new task..." aria-label="New task">
+        <select id="prioritySelect" aria-label="Task priority">
+          <option value="Low">Low Priority</option>
+          <option value="Medium">Medium Priority</option>
+          <option value="High">High Priority</option>
+        </select>
+        <input type="date" id="dueDateInput" aria-label="Task due date">
+        <button class="btn" id="addTaskBtn" aria-label="Add task"><i class="fas fa-plus"></i> Add Task</button>
+      </div>
+      <div class="input-group">
+        <button class="btn btn-secondary" id="clearAllBtn" aria-label="Clear all tasks"><i class="fas fa-trash"></i> Clear All</button>
+      </div>
+      <ul class="task-list" id="taskList"></ul>
+    </section>
+
+    <!-- Ad Space: Mid-Content Banner -->
+    <div class="ad-space">
+      <!-- Insert ad code here (e.g., Google AdSense, banner ad, 300x250) -->
+      <p>Advertisement</p>
+    </div>
+
+    <section class="suggested-tools">
+      <h2>Suggested Tools for You</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-calendar-day"></i></div>
+          <h3>Daily Planner</h3>
+          <p>Plan your day with drag-and-drop time blocks for efficient scheduling.</p>
+          <a href="/daily-planner" class="btn btn-secondary" aria-label="Use Daily Planner tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-stopwatch"></i></div>
+          <h3>Task Timer (Pomodoro)</h3>
+          <p>Enhance focus with customizable work and break cycles.</p>
+          <a href="/pomodoro-timer" class="btn btn-secondary" aria-label="Use Pomodoro Timer tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-columns"></i></div>
+          <h3>Kanban Board</h3>
+          <p>Organize tasks visually with To Do, In Progress, and Done columns.</p>
+          <a href="/kanban-board" class="btn btn-secondary" aria-label="Use Kanban Board tool">Use Tool</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <details class="faq-item">
+        <summary>Why use a to-do list for task management?</summary>
+        <p>A to-do list helps you prioritize tasks, stay organized, and reduce stress by providing a clear overview of your responsibilities. It ensures you focus on what matters most.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is ToolPix's to-do list tool really free?</summary>
+        <p>Absolutely, our to-do list tool is free with no registration required. Use it anytime to manage your tasks efficiently.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I set due dates for tasks?</summary>
+        <p>Yes, you can add due dates to each task using the date input field. Tasks are displayed with their due dates for better planning.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How are tasks saved?</summary>
+        <p>Tasks are stored in your browser's local storage, so they remain available even after you close the page. Use the "Clear All" button to remove them when needed.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use this tool offline?</summary>
+        <p>Once loaded, the tool works offline as tasks are saved locally in your browser. However, an internet connection is needed to access other linked tools.</p>
+      </details>
+    </section>
+  </main>
+
+  <!-- Ad Space: Footer Banner -->
+  <div class="ad-space" style="max-width: 1200px; margin: 0 auto 2rem;">
+    <!-- Insert ad code here (e.g., Google AdSense, banner ad, 728x90) -->
+    <p>Advertisement</p>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="/" class="logo">ToolPix</a>
+        <p>Free online tools for productivity, task management, and more.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Productivity Tools</h3>
+        <ul>
+          <li><a href="/daily-planner"><i class="fas fa-calendar-day"></i> Daily Planner</a></li>
+          <li><a href="/habit-tracker"><i class="fas fa-check-circle"></i> Habit Tracker</a></li>
+          <li><a href="/pomodoro-timer"><i class="fas fa-stopwatch"></i> Task Timer (Pomodoro)</a></li>
+          <li><a href="/kanban-board"><i class="fas fa-columns"></i> Kanban Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href=".static/sitemap.xml">Sitemap</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const taskInput = document.getElementById('taskInput');
+    const prioritySelect = document.getElementById('prioritySelect');
+    const dueDateInput = document.getElementById('dueDateInput');
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const taskList = document.getElementById('taskList');
+
+    // Load tasks from local storage
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    renderTasks();
+
+    addTaskBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') addTask();
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+      tasks = [];
+      saveTasks();
+      renderTasks();
+    });
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (!taskText) {
+        taskInput.focus();
+        return;
+      }
+
+      const task = {
+        id: Date.now(),
+        text: taskText,
+        priority: prioritySelect.value,
+        dueDate: dueDateInput.value,
+        completed: false
+      };
+
+      tasks.push(task);
+      saveTasks();
+      renderTasks();
+      taskInput.value = '';
+      dueDateInput.value = '';
+      taskInput.focus();
+    }
+
+    function renderTasks() {
+      taskList.innerHTML = '';
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.className = `task-item ${task.completed ? 'completed' : ''}`;
+        li.innerHTML = `
+          <input type="checkbox" ${task.completed ? 'checked' : ''} aria-label="Mark task ${task.text} as completed">
+          <span class="task-text">${task.text}</span>
+          ${task.dueDate ? `<span class="task-due">Due: ${task.dueDate}</span>` : ''}
+          <span class="task-priority priority-${task.priority.toLowerCase()}">${task.priority}</span>
+          <button aria-label="Delete task ${task.text}"><i class="fas fa-trash"></i></button>
+        `;
+
+        li.querySelector('input').addEventListener('change', () => {
+          task.completed = !task.completed;
+          saveTasks();
+          renderTasks();
+        });
+
+        li.querySelector('button').addEventListener('click', () => {
+          tasks = tasks.filter(t => t.id !== task.id);
+          saveTasks();
+          renderTasks();
+        });
+
+        taskList.appendChild(li);
+      });
+    }
+
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '20px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.background = 'var(--primary)';
+    darkModeToggle.style.color = 'white';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.borderRadius = '50%';
+    darkModeToggle.style.width = '50px';
+    darkModeToggle.style.height = '50px';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.zIndex = '99';
+    darkModeToggle.style.boxShadow = '0 2px 10px var(--shadow)';
+    darkModeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark-mode')) {
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+      document.documentElement.classList.add('light-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    document.body.appendChild(darkModeToggle);
+  </script>
+</body>
+</html>

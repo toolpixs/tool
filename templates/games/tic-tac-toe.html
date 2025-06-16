@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play Tic-Tac-Toe online for free at Toolpix Games! Enjoy single-player mode against a smart AI bot or challenge friends in two-player mode. Learn how to play Tic-Tac-Toe with our easy guide. No downloads needed, playable on any device.">
+  <meta name="keywords" content="play tic-tac-toe online, free tic-tac-toe game, online tic-tac-toe, tic-tac-toe against computer, two-player tic-tac-toe, tic-tac-toe guide, learn tic-tac-toe, tic-tac-toe rules, tic-tac-toe strategy, tic-tac-toe for beginners, tic-tac-toe board, online tic-tac-toe game, tic-tac-toe AI, Toolpix Games">
+  <meta name="author" content="Toolpix Games">
+  <meta name="robots" content="index, follow">
+  <title>Play Tic-Tac-Toe Online Free - Toolpix Games</title>
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #1c2526;
+      color: #e0e0e0;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Layout Sections */
+    .section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #2d3839 0%, #1c2526 100%);
+      border-radius: 15px;
+      margin: 1rem;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(212, 163, 115, 0.2) 0%, transparent 70%);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .features-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background-color: #2d3839;
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card h3 {
+      color: #d4a373;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .feature-card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #d4a373;
+    }
+
+    .game-modes-section {
+      background-color: #2d3839;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .guide-section {
+      background-color: #2d3839;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: #d4a373;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    strong {
+      color: #d4a373;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #d4a373;
+      color: #1c2526;
+    }
+
+    .btn-primary:hover {
+      background-color: #e0c4a8;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: #3a4b4c;
+      color: #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4d5e5f;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-large {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    /* Game Mode Selection */
+    .mode-selection {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .difficulty-selection {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      animation: fadeIn 0.5s ease;
+    }
+
+    /* Navigation */
+    .home-link {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 10;
+    }
+
+    .back-button-container {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 10;
+    }
+
+    /* Game Board */
+    .game-section {
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      background-color: #1c2526;
+      position: relative;
+    }
+
+    .gameboard-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .gameboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 60vmin;
+      aspect-ratio: 1/1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      background-color: #3a4b4c;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      background-color: #f0d9b5;
+      border-radius: 5px;
+      transition: transform 0.2s ease;
+      aspect-ratio: 1/1;
+      font-size: 4rem;
+      font-weight: bold;
+      color: #1c2526;
+    }
+
+    .cell:hover {
+      transform: scale(1.05);
+      background-color: #e0c4a8;
+    }
+
+    .cell.x {
+      color: #d4a373;
+    }
+
+    .cell.o {
+      color: #3a4b4c;
+    }
+
+    .game-info {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #2d3839;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      z-index: 2000;
+      animation: popIn 0.4s ease;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .popup h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #d4a373;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Ad Banner */
+    .ad-banner {
+      height: 60px;
+      width: 100%;
+      background-color: #2d3839;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      color: #e0e0e0;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .section {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .mode-selection {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+      
+      .gameboard {
+        max-width: 95vmin;
+      }
+
+      .cell {
+        font-size: 3rem;
+      }
+
+      footer {
+        padding: 15px;
+        position: sticky;
+        bottom: 0;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      footer a {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+    }
+
+    footer {
+      background-color: #0f3460;
+      padding: 20px 50px;
+      text-align: center;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer a {
+      color: #e94560;
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Screen -->
+  <div class="section" id="welcomeScreen">
+    <div class="home-link">
+      <a href="/" class="btn btn-secondary" aria-label="Return to home page">🏠 Home</a>
+    </div>
+    
+    <div class="hero-section">
+      <h1>Play Tic-Tac-Toe Online Free at Toolpix Games</h1>
+      <p>Challenge yourself against our smart AI or play with friends in this fun and classic Tic-Tac-Toe experience. Perfect for all ages!</p>
+    </div>
+
+    <div class="game-modes-section">
+      <h2>Choose Your Game Mode</h2>
+      <p>Select how you want to play and start your Tic-Tac-Toe adventure!</p>
+      
+      <div class="mode-selection" id="modeSelection">
+        <button class="btn btn-primary btn-large" onclick="showDifficultySelection()" aria-label="Start single-player game against bot">
+          Single Player (vs Bot)
+        </button>
+        <button class="btn btn-primary btn-large" onclick="startGame('multi', 'none')" aria-label="Start two-player game">
+          Two Players
+        </button>
+      </div>
+      
+      <div class="difficulty-selection" id="difficultySelection">
+        <select id="difficultyLevel" class="btn btn-secondary" aria-label="Select difficulty level">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard" selected>Hard</option>
+        </select>
+        <div class="mode-selection">
+          <button class="btn btn-primary" onclick="startGame('single', document.getElementById('difficultyLevel').value)" aria-label="Start single-player game">
+            Start Game
+          </button>
+          <button class="btn btn-secondary" onclick="backToModeSelection()" aria-label="Back to mode selection">
+            Back
+          </button>
+        </div>
+      </div>
+      
+      <button class="btn btn-primary" onclick="scrollToGuide()" aria-label="Learn how>).to play Tic-Tac-Toe">
+        How to Play Tic-Tac-Toe
+      </button>
+    </div>
+    
+    <div class="features-section">
+      <div class="feature-card">
+        <i>🎮</i>
+        <h3>Free to Play</h3>
+        <p>Enjoy unlimited Tic-Tac-Toe games without any cost or registration required.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i>🤖</i>
+        <h3>Smart AI Opponent</h3>
+        <p>Play against our intelligent Tic-Tac-Toe bot with adjustable difficulty levels.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i>👥</i>
+        <h3>Two-Player Mode</h3>
+        <p>Challenge friends or family members on the same device.</p>
+      </div>
+    </div>
+    
+    <div class="guide-section" id="guideSection">
+      <h2>How to Play Tic-Tac-Toe: A Beginner's Guide</h2>
+      <p>Tic-Tac-Toe is a classic two-player game played on a 3x3 grid. Whether you're new to the game or looking to improve, this guide explains the rules, how to play, and basic strategies to help you enjoy Tic-Tac-Toe online.</p>
+      
+      <h3>Tic-Tac-Toe Game Objective</h3>
+      <p>The goal of Tic-Tac-Toe is to be the first player to get three of their symbols (X or O) in a row, column, or diagonal. If neither player achieves this and all squares are filled, the game ends in a draw.</p>
+      
+      <h3>Tic-Tac-Toe Rules</h3>
+      <ol>
+        <li><strong>Setup:</strong> The game is played on a 3x3 grid. One player uses X, and the other uses O.</li>
+        <li><strong>Turns:</strong> Players take turns placing their symbol (X or O) in an empty square. The first player is usually X.</li>
+        <li><strong>Winning:</strong> A player wins by placing three of their symbols in a horizontal, vertical, or diagonal line.</li>
+        <li><strong>Draw:</strong> If all nine squares are filled and no player has three symbols in a row, the game is a draw.</li>
+      </ol>
+      
+      <h3>Tic-Tac-Toe Strategies for Beginners</h3>
+      <ul>
+        <li><strong>Take the Center:</strong> Starting in the center gives you the most opportunities to create a winning line.</li>
+        <li><strong>Block Opponent:</strong> If your opponent is close to getting three in a row, place your symbol to block them.</li>
+        <li><strong>Create Forks:</strong> Set up a position where you have two ways to win, forcing your opponent to block only one.</li>
+        <li><strong>Control Corners:</strong> Corners are valuable as they are part of multiple winning lines.</li>
+        <li><strong>Plan Ahead:</strong> Think about your opponent's possible moves and plan your strategy to counter them.</li>
+      </ul>
+      
+      <h3>Ready to Play?</h3>
+      <p>Jump into a game now or scroll up to choose your mode! Play Tic-Tac-Toe online free, challenge our AI, or enjoy a two-player match with friends.</p>
+    </div>
+    
+    <div class="ad-banner">Advertisement</div>
+    
+    <footer>
+      <a href="/">Home</a>
+      <a href="/">Games</a>
+      <a href="/all-tools">All Tools</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </footer>
+  </div>
+
+  <!-- Game Screen -->
+  <div class="game-section" id="gameSection">
+    <div class="back-button-container">
+      <button class="btn btn-secondary" onclick="backToWelcome()" aria-label="Return to welcome screen">Back</button>
+    </div>
+    <div class="gameboard-container">
+      <div class="gameboard" id="gameboard"></div>
+    </div>
+    <div class="game-info" id="gameInfo">X's turn</div>
+    <div class="ad-banner">Advertisement</div>
+  </div>
+
+  <!-- Game Over Popup -->
+  <div class="popup" id="gamePopup">
+    <h3 id="popupMessage"></h3>
+    <div class="popup-buttons">
+      <button class="btn btn-primary" onclick="restartGame()" aria-label="Restart the game">Restart Game</button>
+      <button class="btn btn-secondary" onclick="backToWelcome()" aria-label="Return to welcome screen">Back</button>
+    </div>
+  </div>
+
+  <script>
+    // Game state and configuration
+    const initialBoard = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ];
+
+    // Game state variables
+    let board = [];
+    let currentPlayer = 'X';
+    let gameActive = false;
+    let gameMode = '';
+    let difficulty = 'hard';
+
+    // Initialize the game
+    function initGame() {
+      const savedGame = localStorage.getItem('ticTacToeGame');
+      if (savedGame) {
+        const gameState = JSON.parse(savedGame);
+        board = gameState.board;
+        currentPlayer = gameState.currentPlayer;
+        gameMode = gameState.gameMode;
+        difficulty = gameState.difficulty || 'hard';
+        gameActive = true;
+
+        document.getElementById('welcomeScreen').style.display = 'none';
+        document.getElementById('gameSection').style.display = 'flex';
+        document.getElementById('gameInfo').textContent = `${currentPlayer}'s turn`;
+        initGameboard();
+        renderBoard();
+        
+        if (gameMode === 'single' && currentPlayer === 'O') {
+          setTimeout(botMove, 500);
+        }
+      }
+    }
+
+    // Initialize gameboard UI
+    function initGameboard() {
+      const gameboard = document.getElementById('gameboard');
+      gameboard.innerHTML = '';
+      gameboard.style.gridTemplateColumns = `repeat(3, 1fr)`;
+      
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          gameboard.appendChild(cell);
+        }
+      }
+      gameboard.addEventListener('click', handleCellClick);
+    }
+
+    // UI Navigation Functions
+    function showDifficultySelection() {
+      document.getElementById('modeSelection').style.display = 'none';
+      document.getElementById('difficultySelection').style.display = 'flex';
+    }
+
+    function backToModeSelection() {
+      document.getElementById('modeSelection').style.display = 'flex';
+      document.getElementById('difficultySelection').style.display = 'none';
+    }
+
+    function scrollToGuide() {
+      document.getElementById('guideSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function startGame(mode, diff) {
+      gameMode = mode;
+      difficulty = diff || 'none';
+      gameActive = true;
+      board = initialBoard.map(row => row.slice());
+      currentPlayer = 'X';
+      
+      saveGameState();
+      
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('gameSection').style.display = 'flex';
+      document.getElementById('gameInfo').textContent = "X's turn";
+      document.getElementById('gamePopup').style.display = 'none';
+      initGameboard();
+      renderBoard();
+    }
+
+    function backToWelcome() {
+      gameActive = false;
+      localStorage.removeItem('ticTacToeGame');
+      document.getElementById('gameSection').style.display = 'none';
+      document.getElementById('welcomeScreen').style.display = 'block';
+      document.getElementById('gamePopup').style.display = 'none';
+      document.getElementById('modeSelection').style.display = 'flex';
+      document.getElementById('difficultySelection').style.display = 'none';
+    }
+
+    // Save game state to localStorage
+    function saveGameState() {
+      const gameState = {
+        board: board,
+        currentPlayer: currentPlayer,
+        gameMode: gameMode,
+        difficulty: difficulty
+      };
+      localStorage.setItem('ticTacToeGame', JSON.stringify(gameState));
+    }
+
+    // Render the board
+    function renderBoard() {
+      const cells = document.querySelectorAll('.cell');
+      cells.forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        const symbol = board[row][col];
+        cell.innerHTML = symbol;
+        cell.classList.remove('x', 'o');
+        if (symbol) {
+          cell.classList.add(symbol.toLowerCase());
+        }
+      });
+    }
+
+    // Handle cell clicks
+    function handleCellClick(event) {
+      if (!gameActive) return;
+      
+      const cell = event.target.closest('.cell');
+      if (!cell) return;
+      
+      const row = parseInt(cell.dataset.row);
+      const col = parseInt(cell.dataset.col);
+      
+      if (board[row][col] === '') {
+        makeMove(row, col);
+      }
+    }
+
+    // Game move logic
+    function makeMove(row, col) {
+      board[row][col] = currentPlayer;
+      renderBoard();
+      
+      if (checkWin(currentPlayer)) {
+        showPopup(`${currentPlayer} wins!`);
+        gameActive = false;
+        localStorage.removeItem('ticTacToeGame');
+      } else if (checkDraw()) {
+        showPopup("It's a draw!");
+        gameActive = false;
+        localStorage.removeItem('ticTacToeGame');
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        document.getElementById('gameInfo').textContent = `${currentPlayer}'s turn`;
+        saveGameState();
+        
+        if (gameMode === 'single' && currentPlayer === 'O') {
+          setTimeout(botMove, 500);
+        }
+      }
+    }
+
+    // Bot move logic
+    function botMove() {
+      if (!gameActive || currentPlayer !== 'O') return;
+      
+      let move;
+      if (difficulty === 'easy') {
+        move = getRandomMove();
+      } else if (difficulty === 'medium') {
+        move = getMediumMove();
+      } else if (difficulty === 'hard') {
+        move = getBestMove();
+      }
+      
+      if (move) {
+        makeMove(move.row, move.col);
+      }
+    }
+
+    // Get random empty cell
+    function getRandomMove() {
+      const emptyCells = [];
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          if (board[r][c] === '') {
+            emptyCells.push({ row: r, col: c });
+          }
+        }
+      }
+      return emptyCells.length > 0 ? 
+        emptyCells[Math.floor(Math.random() * emptyCells.length)] : 
+        null;
+    }
+
+    // Medium difficulty: Try to win or block, else random
+    function getMediumMove() {
+      // Try to win
+      let move = findWinningMove('O');
+      if (move) return move;
+      
+      // Try to block opponent's win
+      move = findWinningMove('X');
+      if (move) return move;
+      
+      // Prefer center
+      if (board[1][1] === '') return { row: 1, col: 1 };
+      
+      // Random move
+      return getRandomMove();
+    }
+
+    // Hard difficulty: Use Minimax algorithm
+    function getBestMove() {
+      let bestScore = -Infinity;
+      let move = null;
+      
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          if (board[r][c] === '') {
+            board[r][c] = 'O';
+            const score = minimax(0, false);
+            board[r][c] = '';
+            if (score > bestScore) {
+              bestScore = score;
+              move = { row: r, col: c };
+            }
+          }
+        }
+      }
+      return move;
+    }
+
+    // Minimax algorithm for hard difficulty
+    function minimax(depth, isMaximizing) {
+      if (checkWin('X')) return -10;
+      if (checkWin('O')) return 10;
+      if (checkDraw()) return 0;
+      
+      if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let r = 0; r < 3; r++) {
+          for (let c = 0; c < 3; c++) {
+            if (board[r][c] === '') {
+              board[r][c] = 'O';
+              const score = minimax(depth + 1, false);
+              board[r][c] = '';
+              bestScore = Math.max(score, bestScore);
+            }
+          }
+        }
+        return bestScore;
+      } else {
+        let bestScore = Infinity;
+        for (let r = 0; r < 3; r++) {
+          for (let c = 0; c < 3; c++) {
+            if (board[r][c] === '') {
+              board[r][c] = 'X';
+              const score = minimax(depth + 1, true);
+              board[r][c] = '';
+              bestScore = Math.min(score, bestScore);
+            }
+          }
+        }
+        return bestScore;
+      }
+    }
+
+    // Check for a winning move
+    function findWinningMove(player) {
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          if (board[r][c] === '') {
+            board[r][c] = player;
+            const wins = checkWin(player);
+            board[r][c] = '';
+            if (wins) return { row: r, col: c };
+          }
+        }
+      }
+      return null;
+    }
+
+    // Check for a win
+    function checkWin(player) {
+      // Check rows
+      for (let r = 0; r < 3; r++) {
+        if (board[r][0] === player && board[r][1] === player && board[r][2] === player) {
+          return true;
+        }
+      }
+      
+      // Check columns
+      for (let c = 0; c < 3; c++) {
+        if (board[0][c] === player && board[1][c] === player && board[2][c] === player) {
+          return true;
+        }
+      }
+      
+      // Check diagonals
+      if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
+        return true;
+      }
+      if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
+        return true;
+      }
+      
+      return false;
+    }
+
+    // Check for a draw
+    function checkDraw() {
+      return board.every(row => row.every(cell => cell !== ''));
+    }
+
+    // UI Helpers
+    function showPopup(message) {
+      document.getElementById('popupMessage').textContent = message;
+      document.getElementById('gamePopup').style.display = 'block';
+    }
+
+    function restartGame() {
+      startGame(gameMode, difficulty);
+    }
+
+    // Initialize the game when page loads
+    window.addEventListener('DOMContentLoaded', initGame);
+  </script>
+</body>
+</html>

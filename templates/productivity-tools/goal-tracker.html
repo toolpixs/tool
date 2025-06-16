@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goal Tracker Tool - Free Goal Management | ToolPix</title>
+  <meta name="description" content="Track your goals with ToolPix's free Goal Tracker tool. Define goals, set milestones, and link tasks to stay organized. No registration required.">
+  <meta name="keywords" content="goal tracker, milestones, task management, productivity tool, free goal tracker, ToolPix">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ToolPix">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpixs.github.io/goal-tracker" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Goal Tracker Tool - Free Goal Management | ToolPix">
+  <meta property="og:description" content="Define goals, set milestones, and link tasks to stay organized. No sign-up required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpixs.github.io/goal-tracker">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/goal-tracker-social.jpg">
+  <meta property="og:site_name" content="ToolPix">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Goal Tracker Tool - ToolPix">
+  <meta name="twitter:description" content="Free tool to track goals, milestones, and tasks for better productivity.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/goal-tracker-twitter.jpg">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ToolPix Goal Tracker",
+      "description": "A free online tool for defining goals, setting milestones, and linking tasks to stay organized. No registration required.",
+      "url": "https://toolpixs.github.io/goal-tracker",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "200"
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-light: #ecfdf5;
+      --secondary: #3b82f6;
+      --secondary-dark: #2563eb;
+      --secondary-light: #eff6ff;
+      --accent: #f43f5e;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --border-light: #f3f4f6;
+      --shadow: rgba(0,0,0,0.05);
+      --shadow-md: rgba(0,0,0,0.1);
+      --radius-md: 8px;
+      --transition: all 0.2s ease;
+    }
+
+    html.dark-mode {
+      --text: #e5e7eb;
+      --text-light: #9ca3af;
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --border: #374151;
+      --border-light: #4b5563;
+      --shadow: rgba(0,0,0,0.2);
+      --primary-light: #064e3b;
+      --secondary-light: #1e40af;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.dark-mode):not(.light-mode) {
+        --text: #e5e7eb;
+        --text-light: #9ca3af;
+        --bg: #111827;
+        --card-bg: #1f2937;
+        --border: #374151;
+        --border-light: #4b5563;
+        --shadow: rgba(0,0,0,0.2);
+        --primary-light: #064e3b;
+        --secondary-light: #1e40af;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--card-bg);
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 2px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+
+    .header-title {
+      flex: 1;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: var(--secondary-dark); }
+
+    .btn-danger { background: var(--accent); }
+    .btn-danger:hover { background: #e11d48; }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      flex: 1;
+    }
+
+    .intro {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px var(--shadow);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .intro h1 {
+      font-size: 1.875rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .intro p {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-group input, .input-group textarea, .input-group select {
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .goal-list {
+      list-style: none;
+    }
+
+    .goal-item {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    .goal-item:hover {
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .goal-header h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    .goal-meta {
+      display: flex;
+      gap: 1rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--border-light);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .milestone-list, .task-list {
+      list-style: none;
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .milestone-item, .task-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .milestone-item:last-child, .task-item:last-child {
+      border-bottom: none;
+    }
+
+    .milestone-item input[type="checkbox"], .task-item input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+
+    .milestone-item span, .task-item span {
+      flex: 1;
+      font-size: 0.875rem;
+    }
+
+    .milestone-item button, .task-item button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.875rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .milestone-item button:hover, .task-item button:hover {
+      color: #e11d48;
+    }
+
+    .add-sub-item {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .suggested-tools {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    .suggested-tools h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 1px 2px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px var(--shadow-md);
+    }
+
+    .tool-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .tool-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .tool-card p {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-section {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--primary);
+      font-size: 0.875rem;
+    }
+
+    .faq-item summary:hover {
+      color: var(--primary-dark);
+    }
+
+    .faq-item p {
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 1.5rem 1rem;
+      box-shadow: 0 -1px 2px var(--shadow);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .footer-logo a {
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-links h3 {
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.75rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      .intro h1 {
+        font-size: 1.5rem;
+      }
+      .tool-container h2, .faq-section h2 {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-title {
+        font-size: 1rem;
+      }
+      .logo {
+        font-size: 1.25rem;
+      }
+      .intro p {
+        font-size: 0.875rem;
+      }
+      .goal-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        <img src="/static/images/icon.png" alt="ToolPix Logo">
+      </a>
+      <span class="header-title">Goal Tracker Tool</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Free Goal Tracker Tool</h1>
+      <p>Stay organized with ToolPix's Goal Tracker. Define your goals, set milestones, and link tasks to track progress. No sign-up required.</p>
+    </section>
+
+    <section class="tool-container">
+      <h2>Add New Goal</h2>
+      <div class="input-group">
+        <input type="text" id="goalTitle" placeholder="Goal title (e.g., Learn Python)" aria-label="Goal title">
+        <textarea id="goalDescription" placeholder="Goal description (optional)" aria-label="Goal description"></textarea>
+        <input type="date" id="goalDueDate" aria-label="Goal due date">
+        <button class="btn" id="addGoalBtn" aria-label="Add goal"><i class="fas fa-plus"></i> Add Goal</button>
+      </div>
+      <div class="input-group">
+        <button class="btn btn-secondary" id="clearAllBtn" aria-label="Clear all goals"><i class="fas fa-trash"></i> Clear All</button>
+      </div>
+    </section>
+
+    <section class="tool-container">
+      <h2>Your Goals</h2>
+      <ul class="goal-list" id="goalList"></ul>
+    </section>
+
+    <section class="suggested-tools">
+      <h2>Explore More Tools</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-list"></i></div>
+          <h3>Task Dependency Manager</h3>
+          <p>Manage tasks with dependencies, priorities, and due dates.</p>
+          <a href="/task-dependency" class="btn btn-secondary" aria-label="Use Task Dependency Manager tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-calendar"></i></div>
+          <h3>Calendar View</h3>
+          <p>Month, week, and day views with task scheduling.</p>
+          <a href="/calendar-view" class="btn btn-secondary" aria-label="Use Calendar View tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-check-circle"></i></div>
+          <h3>Habit Tracker</h3>
+          <p>Track daily habits with streaks and progress indicators.</p>
+          <a href="/habit-tracker" class="btn btn-secondary" aria-label="Use Habit Tracker tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-ban"></i></div>
+          <h3>Distraction Blocker</h3>
+          <p>Block specific URLs during work sessions.</p>
+          <a href="/distraction-blocker" class="btn btn-secondary" aria-label="Use Distraction Blocker tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-expand"></i></div>
+          <h3>Zen Mode</h3>
+          <p>Full-screen interface for zero distractions.</p>
+          <a href="/zen-mode" class="btn btn-secondary" aria-label="Use Zen Mode tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-heart"></i></div>
+          <h3>Gratitude Journal</h3>
+          <p>Daily notes on what you're thankful for to boost mood.</p>
+          <a href="/gratitude-journal" class="btn btn-secondary" aria-label="Use Gratitude Journal tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-stopwatch"></i></div>
+          <h3>Pomodoro Timer</h3>
+          <p>Boost focus with customizable work and break intervals.</p>
+          <a href="/pomodoro-timer" class="btn btn-secondary" aria-label="Use Pomodoro Timer tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-columns"></i></div>
+          <h3>Kanban Board</h3>
+          <p>Visualize tasks with To Do, In Progress, and Done columns.</p>
+          <a href="/kanban-board" class="btn btn-secondary" aria-label="Use Kanban Board tool">Use Tool</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <details class="faq-item">
+        <summary>What is the Goal Tracker?</summary>
+        <p>The Goal Tracker helps you define goals, set milestones, and link tasks to track progress toward your objectives.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the Goal Tracker free?</summary>
+        <p>Yes, ToolPix's Goal Tracker is completely free with no registration required.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are my goals saved?</summary>
+        <p>Yes, your goals, milestones, and tasks are saved in your browser's local storage and persist across sessions until cleared.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I edit or delete goals?</summary>
+        <p>Yes, you can delete goals, milestones, and tasks. Editing is not supported directly, but you can delete and recreate items as needed.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="/" class="logo">ToolPix</a>
+        <p>Empowering productivity with free online tools.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Tools</h3>
+        <ul>
+          <li><a href="/task-dependency"><i class="fas fa-list"></i> Task Dependency Manager</a></li>
+          <li><a href="/calendar-view"><i class="fas fa-calendar"></i> Calendar View</a></li>
+          <li><a href="/habit-tracker"><i class="fas fa-check-circle"></i> Habit Tracker</a></li>
+          <li><a href="/distraction-blocker"><i class="fas fa-ban"></i> Distraction Blocker</a></li>
+          <li><a href="/zen-mode"><i class="fas fa-expand"></i> Zen Mode</a></li>
+          <li><a href="/gratitude-journal"><i class="fas fa-heart"></i> Gratitude Journal</a></li>
+          <li><a href="/pomodoro-timer"><i class="fas fa-stopwatch"></i> Pomodoro Timer</a></li>
+          <li><a href="/kanban-board"><i class="fas fa-columns"></i> Kanban Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const goalTitle = document.getElementById('goalTitle');
+    const goalDescription = document.getElementById('goalDescription');
+    const goalDueDate = document.getElementById('goalDueDate');
+    const addGoalBtn = document.getElementById('addGoalBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const goalList = document.getElementById('goalList');
+
+    let goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+    renderGoals();
+
+    addGoalBtn.addEventListener('click', addGoal);
+    goalTitle.addEventListener('keypress', (e) => e.key === 'Enter' && addGoal());
+    clearAllBtn.addEventListener('click', () => {
+      goals = [];
+      saveGoals();
+      renderGoals();
+    });
+
+    function addGoal() {
+      const title = goalTitle.value.trim();
+      if (!title) {
+        goalTitle.focus();
+        return;
+      }
+
+      const goal = {
+        id: Date.now(),
+        title,
+        description: goalDescription.value.trim(),
+        dueDate: goalDueDate.value,
+        milestones: [],
+        tasks: []
+      };
+
+      goals.push(goal);
+      saveGoals();
+      renderGoals();
+      goalTitle.value = '';
+      goalDescription.value = '';
+      goalDueDate.value = '';
+      goalTitle.focus();
+    }
+
+    function addMilestone(goalId) {
+      const input = document.getElementById(`milestoneInput-${goalId}`);
+      const title = input.value.trim();
+      if (!title) return;
+
+      const goal = goals.find(g => g.id === goalId);
+      goal.milestones.push({
+        id: Date.now(),
+        title,
+        completed: false
+      });
+      saveGoals();
+      renderGoals();
+      input.value = '';
+    }
+
+    function addTask(goalId) {
+      const input = document.getElementById(`taskInput-${goalId}`);
+      const title = input.value.trim();
+      if (!title) return;
+
+      const goal = goals.find(g => g.id === goalId);
+      goal.tasks.push({
+        id: Date.now(),
+        title,
+        completed: false
+      });
+      saveGoals();
+      renderGoals();
+      input.value = '';
+    }
+
+    function toggleMilestone(goalId, milestoneId) {
+      const goal = goals.find(g => g.id === goalId);
+      const milestone = goal.milestones.find(m => m.id === milestoneId);
+      milestone.completed = !milestone.completed;
+      saveGoals();
+      renderGoals();
+    }
+
+    function toggleTask(goalId, taskId) {
+      const goal = goals.find(g => g.id === goalId);
+      const task = goal.tasks.find(t => t.id === taskId);
+      task.completed = !task.completed;
+      saveGoals();
+      renderGoals();
+    }
+
+    function deleteGoal(goalId) {
+      goals = goals.filter(g => g.id !== goalId);
+      saveGoals();
+      renderGoals();
+    }
+
+    function deleteMilestone(goalId, milestoneId) {
+      const goal = goals.find(g => g.id === goalId);
+      goal.milestones = goal.milestones.filter(m => m.id !== milestoneId);
+      saveGoals();
+      renderGoals();
+    }
+
+    function deleteTask(goalId, taskId) {
+      const goal = goals.find(g => g.id === goalId);
+      goal.tasks = goal.tasks.filter(t => t.id !== taskId);
+      saveGoals();
+      renderGoals();
+    }
+
+    function calculateProgress(goal) {
+      const totalItems = goal.milestones.length + goal.tasks.length;
+      if (totalItems === 0) return 0;
+      const completedItems = goal.milestones.filter(m => m.completed).length + goal.tasks.filter(t => t.completed).length;
+      return Math.round((completedItems / totalItems) * 100);
+    }
+
+    function renderGoals() {
+      goalList.innerHTML = '';
+      goals.sort((a, b) => b.id - a.id).forEach(goal => {
+        const li = document.createElement('li');
+        li.className = 'goal-item';
+        const progress = calculateProgress(goal);
+        li.innerHTML = `
+          <div class="goal-header">
+            <h3>${goal.title}</h3>
+            <button class="btn-danger" onclick="deleteGoal(${goal.id})" aria-label="Delete goal"><i class="fas fa-trash"></i></button>
+          </div>
+          <div class="goal-meta">
+            ${goal.dueDate ? `<span>Due: ${goal.dueDate}</span>` : ''}
+            ${goal.description ? `<span>${goal.description}</span>` : ''}
+            <span>Progress: ${progress}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%"></div>
+          </div>
+          <div>
+            <h4>Milestones</h4>
+            <ul class="milestone-list">
+              ${goal.milestones.map(m => `
+                <li class="milestone-item">
+                  <input type="checkbox" ${m.completed ? 'checked' : ''} onchange="toggleMilestone(${goal.id}, ${m.id})" aria-label="Toggle milestone ${m.title}">
+                  <span style="${m.completed ? 'text-decoration: line-through; color: var(--text-light);' : ''}">${m.title}</span>
+                  <button onclick="deleteMilestone(${goal.id}, ${m.id})" aria-label="Delete milestone"><i class="fas fa-trash"></i></button>
+                </li>
+              `).join('')}
+            </ul>
+            <div class="add-sub-item">
+              <input type="text" id="milestoneInput-${goal.id}" placeholder="Add milestone" aria-label="New milestone">
+              <button class="btn" onclick="addMilestone(${goal.id})" aria-label="Add milestone"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div>
+            <h4>Tasks</h4>
+            <ul class="task-list">
+              ${goal.tasks.map(t => `
+                <li class="task-item">
+                  <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${goal.id}, ${t.id})" aria-label="Toggle task ${t.title}">
+                  <span style="${t.completed ? 'text-decoration: line-through; color: var(--text-light);' : ''}">${t.title}</span>
+                  <button onclick="deleteTask(${goal.id}, ${t.id})" aria-label="Delete task"><i class="fas fa-trash"></i></button>
+                </li>
+              `).join('')}
+            </ul>
+            <div class="add-sub-item">
+              <input type="text" id="task-input-${goal.id}" placeholder="Add task" aria-label="New task">
+              <button onclick="addTask(${goal.id})" class="btn" aria-label="Add task"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        `;
+        goalList.appendChild(li);
+      });
+    }
+
+    function saveGoals() {
+      localStorage.setItem('goals', JSON.stringify(goals));
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '20px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.background = 'var(--primary)';
+    darkModeToggle.style.color = 'white';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.borderRadius = '50%';
+    darkModeToggle.style.width = '40px';
+    darkModeToggle.style.height = '40px';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.zIndex = '99';
+    darkModeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark-mode')) {
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+      document.documentElement.classList.add('light-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    document.body.appendChild(darkModeToggle);
+  </script>
+</body>
+</html>

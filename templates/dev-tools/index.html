@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Tool Pix - Free Online Developer Tools</title>
+    <meta name="description" content="Dev Tool Pix offers free, powerful online tools for developers. Format JSON, obfuscate JS/CSS, encode Base64, and more with our user-friendly suite.">
+    <meta name="keywords" content="developer tools, online JSON formatter, JS obfuscator, CSS obfuscator, Base64 encoder, free dev tools">
+    <meta name="author" content="Dev Tool Pix">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Dev Tool Pix - Free Online Developer Tools">
+    <meta property="og:description" content="Explore Dev Tool Pix's free online tools for developers. Format JSON, obfuscate code, encode Base64, and more with ease.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://yourdomain.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #45a049;
+            --primary-light: #e8f5e9;
+            --secondary: #2196F3;
+            --secondary-dark: #1976D2;
+            --secondary-light: #e3f2fd;
+            --accent: #FF5722;
+            --accent-dark: #E64A19;
+            --text: #333;
+            --text-light: #666;
+            --text-lighter: #888;
+            --bg: #f4f4f4;
+            --card-bg: #fff;
+            --border: #ddd;
+            --border-light: #eee;
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-md: rgba(0,0,0,0.15);
+            --shadow-lg: rgba(0,0,0,0.2);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease;
+            --icon-converter: #FFC107;
+        }
+
+        .dark-mode {
+            --text: #f0f0f0;
+            --text-light: #bbb;
+            --text-lighter: #888;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --border: #333;
+            --border-light: #444;
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-md: rgba(0,0,0,0.4);
+            --shadow-lg: rgba(0,0,0,0.5);
+            --primary-light: #1b5e20;
+            --secondary-light: #0d47a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            color: white;
+            box-shadow: 0 2px 5px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .header-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto;
+        }
+
+        .burger-icon {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--card-bg);
+            transition: var(--transition);
+            z-index: 101;
+            box-shadow: 2px 0 10px var(--shadow);
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .sidebar a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .sidebar a:hover {
+            background: var(--border-light);
+        }
+
+        .sidebar a.active {
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .intro-section h1 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tools-section {
+            margin-bottom: 2rem;
+        }
+
+        .tools-section h2 {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: 0 2px 6px var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px var(--shadow-md);
+        }
+
+        .tool-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--icon-converter);
+        }
+
+        .tool-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .tool-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .tool-card .btn {
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .tool-card .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .tool-card:hover .icon {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .ad-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 15px;
+            margin: 20px auto;
+            text-align: center;
+            border-radius: var(--radius-md);
+            max-width: 728px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 -2px 5px var(--shadow);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--primary);
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 2px 10px var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+
+            .tool-card {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+                border-radius: 0.5rem;
+            }
+
+            .tool-card .icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .tool-card h3 {
+                font-size: 0.85rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .tool-card p {
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .tool-card .btn {
+                font-size: 0.7rem;
+                padding: 0.4rem;
+            }
+
+            main {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .intro-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .intro-section p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 0.4rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo img {
+                height: 24px;
+            }
+
+            .header-title {
+                font-size: 1.1rem;
+            }
+
+            .burger-icon {
+                font-size: 18px;
+                padding: 0.25rem;
+            }
+
+            .sidebar {
+                width: 220px;
+                left: -220px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar a {
+                font-size: 0.8rem;
+                padding: 0.45rem 0.7rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .tool-card {
+                padding: 0.4rem;
+            }
+
+            .tool-card .icon {
+                font-size: 1.3rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .tool-card h3 {
+                font-size: 0.8rem;
+            }
+
+            .tool-card p {
+                font-size: 0.65rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .tool-card .btn {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .tool-card {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .tool-card .icon {
+                font-size: 1.4rem;
+            }
+
+            .tool-card h3 {
+                font-size: 0.85rem;
+            }
+
+            .tool-card p {
+                font-size: 0.7rem;
+            }
+
+            .tool-card .btn {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .tool-card {
+                padding: 0.4rem;
+                font-size: 0.7rem;
+            }
+
+            .tool-card .icon {
+                font-size: 1.2rem;
+            }
+
+            .tool-card h3 {
+                font-size: 0.8rem;
+            }
+
+            .tool-card p {
+                font-size: 0.65rem;
+            }
+
+            .tool-card .btn {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36" loading="lazy">
+            </a>
+            <span class="header-title">DEVELOPER TOOLS</span>
+            <button class="burger-icon" aria-label="Toggle Menu">☰</button>
+        </div>
+        <nav class="sidebar" aria-label="Main Navigation">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/all-tools"><i class="fas fa-th"></i> All Tools</a>
+            <a href="/social-media-tools"><i class="fab fa-youtube"></i> YouTube Tools</a>
+            <a href="/editors"><i class="fas fa-edit"></i> Editors Tools</a>
+            <a href="/converters"><i class="fas fa-exchange-alt"></i> Converters</a>
+            <a href="/productivity-tools"><i class="fas fa-tasks"></i> Productivity</a>
+            <a href="/compilers"><i class="fas fa-code"></i> Code Tools</a>
+            <a href="/dev-tools" class="active"><i class="fas fa-laptop-code"></i> Developer</a>
+            <a href="/games"><i class="fas fa-gamepad"></i> Games</a>
+            <a href="/date-time-tools"><i class="fas fa-clock"></i> Time & Date</a>
+            <a href="/mathematical-tools"><i class="fas fa-calculator"></i> Math Tools</a>
+            <a href="/store"><i class="fas fa-store"></i> Store</a> 
+            <a href="/d2karmy"><i class="fas fa-store"></i> D2K Airdrop</a>
+        </nav>
+        <div class="sidebar-overlay" aria-hidden="true"></div>
+    </header>
+
+    <div class="main-container">
+        <main>
+            <section class="intro-section">
+                <h1>Welcome to Dev Tool Pix</h1>
+                <p>Your go-to suite of free online developer tools. Format JSON, obfuscate code, encode Base64, and more with ease.</p>
+            </section>
+
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+            </div>
+
+            <section class="tools-section">
+                <h2>Powerful Developer Tools</h2>
+                <div class="tools-grid">
+                    <article class="tool-card">
+                        <div class="icon"><i class="fas fa-file-code"></i></div>
+                        <h3>JSON Formatter</h3>
+                        <p>Beautify and validate JSON code with real-time syntax highlighting and error detection.</p>
+                        <a href="/json-formatter" class="btn">Use Tool</a>
+                    </article>
+                    <article class="tool-card">
+                        <div class="icon"><i class="fab fa-js"></i></div>
+                        <h3>JS Obfuscator</h3>
+                        <p>Protect your JavaScript code by making it unreadable while maintaining functionality.</p>
+                        <a href="/js-obfuscator" class="btn">Use Tool</a>
+                    </article>
+                    <article class="tool-card">
+                        <div class="icon"><i class="fab fa-css3-alt"></i></div>
+                        <h3>CSS Obfuscator</h3>
+                        <p>Obfuscate your CSS code to secure your stylesheets without affecting performance.</p>
+                        <a href="/css-obfuscator" class="btn">Use Tool</a>
+                    </article>
+                    <article class="tool-card">
+                        <div class="icon"><i class="fas fa-lock"></i></div>
+                        <h3>Base64 Encoder</h3>
+                        <p>Encode and decode Base64 strings quickly and securely in your browser.</p>
+                        <a href="/base64-encoder" class="btn">Use Tool</a>
+                    </article>
+                </div>
+            </section>
+
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">
+                    <a href="/" class="logo">ToolPix</a>
+                    <p>200+ free online tools for YouTube, images, AI, productivity, coding, and games.</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Tools</h3>
+                <ul>
+                    <li><a href="/social-media-tools"><i class="fab fa-youtube"></i> YouTube Tools</a></li>
+                    <li><a href="/converters"><i class="fas fa-exchange-alt"></i> Converters</a></li>
+                    <li><a href="/productivity-tools"><i class="fas fa-tasks"></i> Productivity</a></li>
+                    <li><a href="/games"><i class="fas fa-gamepad"></i> Online Games</a></li>
+                    <li><a href="/store"><i class="fas fa-store"></i> Premium Store</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="/report-bug"><i class="fas fa-bug"></i> Report Bug</a></li>
+                    <li><a href="/feature-request"><i class="fas fa-lightbulb"></i> Request Feature</a></li>
+                    <li><a href="/faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                    <li><a href="/help"><i class="fas fa-life-ring"></i> Help Center</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Dev Tool Pix. All rights reserved.</p>
+            <a href=".static/sitemap.xml">Sitemap</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/contact">Contact Us</a>
+        </div>
+    </footer>
+
+    <script>
+        const debounce = (func, wait) => {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        };
+
+        // Mobile menu toggle
+        const burgerIcon = document.querySelector('.burger-icon');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        
+        const toggleSidebar = () => {
+            const isOpen = sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+            burgerIcon.textContent = isOpen ? '×' : '☰';
+            burgerIcon.setAttribute('aria-expanded', isOpen);
+        };
+
+        burgerIcon.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        // Dark mode toggle
+        const darkModeToggle = document.createElement('button');
+        darkModeToggle.className = 'dark-mode-toggle';
+        darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        const toggleDarkMode = () => {
+            const isDarkMode = document.documentElement.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+        };
+        darkModeToggle.addEventListener('click', debounce(toggleDarkMode, 100));
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+        }
+        document.body.appendChild(darkModeToggle);
+
+        // Lazy-load animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.tool-card, .intro-section').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

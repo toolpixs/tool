@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Tools – ToolPix</title>
+  <meta name="description" content="Explore all 200+ free online tools on ToolPix, including compilers, converters, productivity tools, games, and more. Search by name or keyword to find the perfect tool.">
+  <meta name="keywords" content="all tools, free online tools, compilers, converters, productivity tools, games, date time tools, mathematical tools, developer tools, editors">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Time Load Company">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpix.netlify.app/all-tools">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="All Tools – ToolPix">
+  <meta property="og:description" content="Browse and search over 200 free tools for coding, productivity, gaming, and more on ToolPix.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpix.netlify.app/all-tools">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/toolpix-social-share.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All Tools – ToolPix">
+  <meta name="twitter:description" content="Browse and search over 200 free tools for coding, productivity, gaming, and more on ToolPix.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/toolpix-twitter-card.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #45a049;
+      --primary-light: #e8f5e9;
+      --secondary: #2196F3;
+      --secondary-dark: #1976D2;
+      --secondary-light: #e3f2fd;
+      --accent: #FF5722;
+      --accent-dark: #E64A19;
+      --text: #333;
+      --text-light: #666;
+      --text-lighter: #888;
+      --bg: #f4f4f4;
+      --card-bg: #fff;
+      --border: #ddd;
+      --border-light: #eee;
+      --shadow: rgba(0,0,0,0.1);
+      --shadow-md: rgba(0,0,0,0.15);
+      --shadow-lg: rgba(0,0,0,0.2);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition: all 0.3s ease;
+      /* Icon colors for sections */
+      --icon-youtube: #FF0000;
+      --icon-converter: #FFC107;
+      --icon-productivity: #3F51B5;
+      --icon-code: #673AB7;
+      --icon-game: #E91E63;
+      --icon-store: #009688;
+      --icon-editor: #0288D1;
+      --icon-time: #7B1FA2;
+      --icon-math: #388E3C;
+      --icon-dev: #F44336;
+    }
+
+    .dark-mode {
+      --text: #f0f0f0;
+      --text-light: #bbb;
+      --text-lighter: #888;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --border-light: #444;
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-md: rgba(0,0,0,0.4);
+      --shadow-lg: rgba(0,0,0,0.5);
+      --primary-light: #1b5e20;
+      --secondary-light: #0d47a1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      box-shadow: 0 2px 5px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 36px;
+      width: auto;
+      transition: var(--transition);
+    }
+
+    .header-title {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 auto;
+    }
+
+    .burger-icon {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--card-bg);
+      transition: var(--transition);
+      z-index: 101;
+      box-shadow: 2px 0 10px var(--shadow);
+      overflow-y: auto;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .sidebar a:hover {
+      background: var(--border-light);
+    }
+
+    .sidebar a.active {
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .main-container {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+      padding: 0 1rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .search-section {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .search-section h2 {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-lighter);
+    }
+
+    .search-bar .icon {
+      font-size: 1.2rem;
+      color: var(--text-light);
+    }
+
+    .tools-section {
+      margin-bottom: 2rem;
+    }
+
+    .tools-section h2 {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px var(--shadow-md);
+    }
+
+    .tool-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tool-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .tool-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .tool-card .btn {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .tool-card .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .tool-card.youtube .icon { color: var(--icon-youtube); }
+    .tool-card.converter .icon { color: var(--icon-converter); }
+    .tool-card.productivity .icon { color: var(--icon-productivity); }
+    .tool-card.code .icon { color: var(--icon-code); }
+    .tool-card.game .icon { color: var(--icon-game); }
+    .tool-card.editor .icon { color: var(--icon-editor); }
+    .tool-card.time .icon { color: var(--icon-time); }
+    .tool-card.math .icon { color: var(--icon-math); }
+    .tool-card.dev .icon { color: var(--icon-dev); }
+
+    .tool-card:hover .icon {
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+
+    footer {
+      background: var(--card-bg);
+      padding: 3rem 1.5rem;
+      margin-top: 3rem;
+      box-shadow: 0 -2px 5px var(--shadow);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer-links h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      z-index: 99;
+      box-shadow: 0 2px 10px var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .dark-mode-toggle:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .main-container {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      .tool-card {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        border-radius: 0.5rem;
+      }
+
+      .tool-card .icon {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .tool-card h3 {
+        font-size: 0.95rem;
+      }
+
+      .tool-card p {
+        font-size: 0.75rem;
+      }
+
+      main {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .search-section {
+        padding: 1rem;
+        top: 60px;
+      }
+
+      .search-section h2 {
+        font-size: 1.4rem;
+      }
+
+      .search-bar {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .search-bar input {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-container {
+        padding: 0.4rem;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+      }
+
+      .logo img {
+        height: 24px;
+      }
+
+      .header-title {
+        font-size: 1.1rem;
+      }
+
+      .burger-icon {
+        font-size: 18px;
+        padding: 0.25rem;
+      }
+
+      .sidebar {
+        width: 220px;
+        left: -220px;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .sidebar a {
+        font-size: 0.8rem;
+        padding: 0.45rem 0.7rem;
+      }
+
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .tool-card {
+        padding: 0.6rem;
+      }
+
+      .tool-card .icon {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .tool-card {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .tool-card .icon {
+        font-size: 1.4rem;
+      }
+
+      .tool-card h3 {
+        font-size: 0.85rem;
+      }
+
+      .tool-card p {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .tool-card {
+        padding: 0.4rem;
+        font-size: 0.7rem;
+      }
+
+      .tool-card .icon {
+        font-size: 1.2rem;
+      }
+
+      .tool-card h3 {
+        font-size: 0.8rem;
+      }
+
+      .tool-card p {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36" loading="lazy">
+      </a>
+      <span class="header-title">ALL TOOLS</span>
+      <button class="burger-icon" aria-label="Toggle Menu">☰</button>
+    </div>
+    <nav class="sidebar" aria-label="Main Navigation">
+      <a href="/"> <i class="fas fa-home"></i> Home</a>
+      <a href="/all-tools" class="active"><i class="fas fa-th"></i> All Tools</a>
+      <a href="/social-media-tools"><i class="fab fa-youtube"></i> YouTube Tools</a>
+      <a href="/editors"><i class="fas fa-edit"></i> Editors Tools</a>
+      <a href="/converters"><i class="fas fa-exchange-alt"></i> Converters</a>
+      <a href="/productivity-tools"><i class="fas fa-tasks"></i> Productivity</a>
+      <a href="/compilers"><i class="fas fa-code"></i> Code Tools</a>
+      <a href="/dev-tools"><i class="fas fa-laptop-code"></i> Developer</a>
+      <a href="/games"><i class="fas fa-gamepad"></i> Games</a>
+      <a href="/date-time-tools"><i class="fas fa-clock"></i> Time & Date</a>
+      <a href="/mathematical-tools"><i class="fas fa-calculator"></i> Math Tools</a>
+      <a href="/store"><i class="fas fa-store"></i> Store</a> 
+      <a href="/d2karmy"><i class="fas fa-store"></i> D2K Airdrop</a>
+    </nav>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+  </header>
+
+  <div class="main-container">
+    <main>
+      <section class="search-section" aria-labelledby="search-tools">
+        <h2 id="search-tools">Search All Tools</h2>
+        <div class="search-bar">
+          <i class="fas fa-search icon" aria-hidden="true"></i>
+          <input type="text" id="searchInput" placeholder="Search tools by name or keyword..." aria-label="Search tools">
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="compilers">
+        <h2 id="compilers">Compilers</h2>
+        <div class="tools-grid" data-category="compilers">
+          <article class="tool-card code">
+            <div class="icon"><i class="fab fa-cuttlefish"></i></div>
+            <h3>C Compiler</h3>
+            <p>Compile and run C code online.</p>
+            <a href="/compilers/c" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fas fa-code"></i></div>
+            <h3>C++ Compiler</h3>
+            <p>Compile and run C++ code online.</p>
+            <a href="/compilers/cpp" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fab fa-html5"></i></div>
+            <h3>HTML Editor</h3>
+            <p>Write and preview HTML code.</p>
+            <a href="/compilers/html" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fab fa-java"></i></div>
+            <h3>Java Compiler</h3>
+            <p>Compile and run Java code online.</p>
+            <a href="/compilers/java" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fab fa-js"></i></div>
+            <h3>JavaScript Editor</h3>
+            <p>Write and run JavaScript code.</p>
+            <a href="/compilers/js" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fab fa-python"></i></div>
+            <h3>Python Compiler</h3>
+            <p>Run Python scripts online.</p>
+            <a href="/compilers/python" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fas fa-database"></i></div>
+            <h3>SQL Editor</h3>
+            <p>Execute SQL queries online.</p>
+            <a href="/compilers/sql" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card code">
+            <div class="icon"><i class="fas fa-file-code"></i></div>
+            <h3>Text Editor</h3>
+            <p>Simple online text editor for coding.</p>
+            <a href="/compilers/text-editor" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="converters">
+        <h2 id="converters">Converters</h2>
+        <div class="tools-grid" data-category="converters">
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-image"></i></div>
+            <h3>Image to JPG</h3>
+            <p>Convert images to JPG format.</p>
+            <a href="/converters/to-jpg" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>PDF to PNG</h3>
+            <p>Convert PDF files to PNG images.</p>
+            <a href="/converters/pdf-to-png" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-file-image"></i></div>
+            <h3>HEIF to ICO</h3>
+            <p>Convert HEIF images to ICO format.</p>
+            <a href="/converters/to-ico" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>JPG to PDF</h3>
+            <p>Convert JPG images to PDF.</p>
+            <a href="/converters/to-pdf" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-image"></i></div>
+            <h3>JPEG to PNG</h3>
+            <p>Convert JPEG images to PNG format.</p>
+            <a href="/converters/to-png" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card converter">
+            <div class="icon"><i class="fas fa-file-image"></i></div>
+            <h3>PNG to WEBP</h3>
+            <p>Convert PNG images to WEBP format.</p>
+            <a href="/converters/to-webp" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="date-time-tools">
+        <h2 id="date-time-tools">Date & Time Tools</h2>
+        <div class="tools-grid" data-category="date-time-tools">
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-bell"></i></div>
+            <h3>Alarm Clock</h3>
+            <p>Set alarms with custom notifications.</p>
+            <a href="/date-time-tools/alarm-clock" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-calendar"></i></div>
+            <h3>Calendar</h3>
+            <p>View and manage dates with a calendar.</p>
+            <a href="/date-time-tools/calendar" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-hourglass-start"></i></div>
+            <h3>Countdown Timer</h3>
+            <p>Create countdown timers for events.</p>
+            <a href="/date-time-tools/countdown-timer" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-calculator"></i></div>
+            <h3>Date Calculator</h3>
+            <p>Calculate the difference between dates.</p>
+            <a href="/date-time-tools/date-calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <h3>Digital Clock</h3>
+            <p>Display the current time digitally.</p>
+            <a href="/date-time-tools/digital-clock" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-stopwatch"></i></div>
+            <h3>Stopwatch</h3>
+            <p>Track elapsed time with a stopwatch.</p>
+            <a href="/date-time-tools/stopwatch" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-globe"></i></div>
+            <h3>Time Zone Converter</h3>
+            <p>Convert times across different zones.</p>
+            <a href="/date-time-tools/time-zone-converter" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card time">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <h3>World Clock</h3>
+            <p>View current times in multiple cities.</p>
+            <a href="/date-time-tools/world-clock" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="dev-tools">
+        <h2 id="dev-tools">Developer Tools</h2>
+        <div class="tools-grid" data-category="dev-tools">
+          <article class="tool-card dev">
+            <div class="icon"><i class="fas fa-lock"></i></div>
+            <h3>Base64 Encoder</h3>
+            <p>Encode and decode Base64 strings.</p>
+            <a href="/dev-tools/base64-encoder" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card dev">
+            <div class="icon"><i class="fab fa-css3-alt"></i></div>
+            <h3>CSS Obfuscator</h3>
+            <p>Obfuscate CSS code for protection.</p>
+            <a href="/dev-tools/css-obfuscator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card dev">
+            <div class="icon"><i class="fab fa-js"></i></div>
+            <h3>JS Obfuscator</h3>
+            <p>Obfuscate JavaScript code securely.</p>
+            <a href="/dev-tools/js-obfuscator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card dev">
+            <div class="icon"><i class="fas fa-code"></i></div>
+            <h3>JSON Formatter</h3>
+            <p>Format and validate JSON data.</p>
+            <a href="/dev-tools/json-formatter" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="editors">
+        <h2 id="editors">Editors</h2>
+        <div class="tools-grid" data-category="editors">
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-image"></i></div>
+            <h3>ADV Image Editor</h3>
+            <p>Advanced image editing tools.</p>
+            <a href="/editors/adv-image-editor" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-compress"></i></div>
+            <h3>Compress Image</h3>
+            <p>Reduce image file size without quality loss.</p>
+            <a href="/editors/compress-image" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>Compress PDF</h3>
+            <p>Compress PDF files to reduce size.</p>
+            <a href="/editors/compress-pdf" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-crop"></i></div>
+            <h3>Image Crop</h3>
+            <p>Crop images to desired dimensions.</p>
+            <a href="/editors/image-crop" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-expand-arrows-alt"></i></div>
+            <h3>Image Resize</h3>
+            <p>Resize images to specific dimensions.</p>
+            <a href="/editors/image-resize" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-cut"></i></div>
+            <h3>Image Shape Cropper</h3>
+            <p>Crop images into custom shapes.</p>
+            <a href="/editors/image-shape-cropper" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-magic"></i></div>
+            <h3>Improve PDF Quality</h3>
+            <p>Enhance the quality of PDF files.</p>
+            <a href="/editors/improve-pdf-quality" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card editor">
+            <div class="icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>PDF Upscaler Enhancer</h3>
+            <p>Upscale and enhance PDF files.</p>
+            <a href="/editors/pdf-upscaler-enhancer" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="games">
+        <h2 id="games">Games</h2>
+        <div class="tools-grid" data-category="games">
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-border-all"></i></div>
+            <h3>2048</h3>
+            <p>Addictive number combination game.</p>
+            <a href="/games/2048" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-chess"></i></div>
+            <h3>Chess</h3>
+            <p>Play chess against the computer.</p>
+            <a href="/games/chess" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-car"></i></div>
+            <h3>Freely Car</h3>
+            <p>Fun car racing game.</p>
+            <a href="/games/freely-car" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-memory"></i></div>
+            <h3>Memory Game</h3>
+            <p>Test your memory with this game.</p>
+            <a href="/games/memory-game" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-th"></i></div>
+            <h3>Sudoku</h3>
+            <p>Classic number puzzle game.</p>
+            <a href="/games/sudoku" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-gamepad"></i></div>
+            <h3>Tic Tac Toe</h3>
+            <p>Play the classic Tic Tac Toe game.</p>
+            <a href="/games/tic-tac-toe" class="btn">Play Now</a>
+          </article>
+          <article class="tool-card game">
+            <div class="icon"><i class="fas fa-font"></i></div>
+            <h3>Wordle</h3>
+            <p>Popular word guessing game.</p>
+            <a href="/games/wordle" class="btn">Play Now</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="mathematical-tools">
+        <h2 id="mathematical-tools">Mathematical Tools</h2>
+        <div class="tools-grid" data-category="mathematical-tools">
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-calculator"></i></div>
+            <h3>Calculator</h3>
+            <p>Basic calculator for quick calculations.</p>
+            <a href="/mathematical-tools/calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Equation Solver</h3>
+            <p>Solve mathematical equations easily.</p>
+            <a href="/mathematical-tools/equation-solver" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-chart-bar"></i></div>
+            <h3>Graphing Calculator</h3>
+            <p>Graph mathematical functions online.</p>
+            <a href="/mathematical-tools/graphing-calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-percentage"></i></div>
+            <h3>Matrix Calculator</h3>
+            <p>Perform matrix operations.</p>
+            <a href="/mathematical-tools/matrix-calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-percentage"></i></div>
+            <h3>Percentage Calculator</h3>
+            <p>Calculate percentages quickly.</p>
+            <a href="/mathematical-tools/percentage-calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-calculator"></i></div>
+            <h3>Scientific Calculator</h3>
+            <p>Advanced calculator for scientific use.</p>
+            <a href="/mathematical-tools/scientific-calculator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card math">
+            <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+            <h3>Unit Converter</h3>
+            <p>Convert between various units.</p>
+            <a href="/mathematical-tools/unit-converter" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="productivity-tools">
+        <h2 id="productivity-tools">Productivity Tools</h2>
+        <div class="tools-grid" data-category="productivity-tools">
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-calendar"></i></div>
+            <h3>Calendar View</h3>
+            <p>View and manage your schedule.</p>
+            <a href="/productivity-tools/calendar-view" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-check-square"></i></div>
+            <h3>Checklist Generator</h3>
+            <p>Create custom checklists.</p>
+            <a href="/productivity-tools/checklist-generator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-calendar-day"></i></div>
+            <h3>Daily Planner</h3>
+            <p>Plan your day effectively.</p>
+            <a href="/productivity-tools/daily-planner" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-ban"></i></div>
+            <h3>Distraction Blocker</h3>
+            <p>Block distractions to stay focused.</p>
+            <a href="/productivity-tools/distraction-blocker" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-folder"></i></div>
+            <h3>Document Organizer</h3>
+            <p>Organize your documents efficiently.</p>
+            <a href="/productivity-tools/document-organizer" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-calendar-check"></i></div>
+            <h3>Event Planner</h3>
+            <p>Plan and manage events.</p>
+            <a href="/productivity-tools/event-planner" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-bullseye"></i></div>
+            <h3>Goal Tracker</h3>
+            <p>Track your goals and progress.</p>
+            <a href="/productivity-tools/goal-tracker" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-heart"></i></div>
+            <h3>Gratitude Journal</h3>
+            <p>Keep a journal of things you're grateful for.</p>
+            <a href="/productivity-tools/gratitude-journal" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Habit Tracker</h3>
+            <p>Track and build daily habits.</p>
+            <a href="/productivity-tools/habit-tracker" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Idea Board</h3>
+            <p>Organize and brainstorm ideas.</p>
+            <a href="/productivity-tools/idea-board" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-th"></i></div>
+            <h3>Kanban Board</h3>
+            <p>Manage tasks with a Kanban board.</p>
+            <a href="/productivity-tools/kanban-board" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>Mind Map Creator</h3>
+            <p>Create mind maps for brainstorming.</p>
+            <a href="/productivity-tools/mind-map-creator" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-sticky-note"></i></div>
+            <h3>Notes Editor</h3>
+            <p>Take and organize notes online.</p>
+            <a href="/productivity-tools/notes-editor" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-stopwatch"></i></div>
+            <h3>Pomodoro Timer</h3>
+            <p>Use the Pomodoro technique to focus.</p>
+            <a href="/productivity-tools/pomodoro-timer" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-tags"></i></div>
+            <h3>Priority Labels</h3>
+            <p>Label tasks by priority.</p>
+            <a href="/productivity-tools/priority-labels" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-th-large"></i></div>
+            <h3>Priority Matrix</h3>
+            <p>Prioritize tasks with a matrix.</p>
+            <a href="/productivity-tools/priority-matrix" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-redo"></i></div>
+            <h3>Recurring Tasks</h3>
+            <p>Manage recurring tasks efficiently.</p>
+            <a href="/productivity-tools/recurring-tasks" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <h3>Routine Scheduler</h3>
+            <p>Schedule daily routines.</p>
+            <a href="/productivity-tools/routine-scheduler" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Smart Task Suggestions</h3>
+            <p>Get smart task recommendations.</p>
+            <a href="/productivity-tools/smart-task-suggestions" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-tasks"></i></div>
+            <h3>Subtasks</h3>
+            <p>Break tasks into smaller subtasks.</p>
+            <a href="/productivity-tools/subtasks" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>Task Dependencies</h3>
+            <p>Manage task dependencies.</p>
+            <a href="/productivity-tools/task-dependencies" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-list-ul"></i></div>
+            <h3>To-Do List</h3>
+            <p>Create and manage to-do lists.</p>
+            <a href="/productivity-tools/to-do-list" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-calendar-week"></i></div>
+            <h3>Weekly Agenda</h3>
+            <p>Plan your week with an agenda.</p>
+            <a href="/productivity-tools/weekly-agenda" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card productivity">
+            <div class="icon"><i class="fas fa-yin-yang"></i></div>
+            <h3>Zen Mode</h3>
+            <p>Focus with a distraction-free mode.</p>
+            <a href="/productivity-tools/zen-mode" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="tools-section" aria-labelledby="social-media-tools">
+        <h2 id="social-media-tools">Social Media Tools</h2>
+        <div class="tools-grid" data-category="social-media-tools">
+          <article class="tool-card youtube">
+            <div class="icon"><i class="fab fa-youtube"></i></div>
+            <h3>YouTube Shorts Downloader</h3>
+            <p>Download YouTube Shorts videos.</p>
+            <a href="/social-media-tools/youtube-shorts-downloader" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card youtube">
+            <div class="icon"><i class="fab fa-youtube"></i></div>
+            <h3>YouTube Thumbnail Downloader</h3>
+            <p>Download YouTube video thumbnails.</p>
+            <a href="/social-media-tools/youtube-thumbnail-downloader" class="btn">Use Tool</a>
+          </article>
+          <article class="tool-card youtube">
+            <div class="icon"><i class="fab fa-youtube"></i></div>
+            <h3>YouTube Video Downloader</h3>
+            <p>Download YouTube videos easily.</p>
+            <a href="/social-media-tools/youtube-video-downloader" class="btn">Use Tool</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="footer-logo">
+          <a href="/" class="logo">ToolPix</a>
+          <p>200+ free online tools for YouTube, images, AI, productivity, coding, and games.</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Tools</h3>
+        <ul>
+          <li><a href="/social-media-tools"><i class="fab fa-youtube"></i> YouTube Tools</a></li>
+          <li><a href="/converters"><i class="fas fa-exchange-alt"></i> Converters</a></li>
+          <li><a href="/productivity-tools"><i class="fas fa-tasks"></i> Productivity</a></li>
+          <li><a href="/games"><i class="fas fa-gamepad"></i> Online Games</a></li>
+          <li><a href="/store"><i class="fas fa-store"></i> Premium Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="/report-bug"><i class="fas fa-bug"></i> Report Bug</a></li>
+          <li><a href="/feature-request"><i class="fas fa-lightbulb"></i> Request Feature</a></li>
+          <li><a href="/faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+          <li><a href="/help"><i class="fas fa-life-ring"></i> Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href="static/sitemap.xml">Sitemap</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const debounce = (func, wait) => {
+      let timeout;
+      return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    };
+
+    // Mobile menu toggle
+    const burgerIcon = document.querySelector('.burger-icon');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    
+    const toggleSidebar = () => {
+      const isOpen = sidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('active');
+      burgerIcon.textContent = isOpen ? '×' : '☰';
+      burgerIcon.setAttribute('aria-expanded', isOpen);
+    };
+
+    burgerIcon.addEventListener('click', toggleSidebar);
+    sidebarOverlay.addEventListener('click', toggleSidebar);
+
+    // Search functionality
+    const searchInput = document.querySelector('#searchInput');
+    const toolCards = document.querySelectorAll('.tool-card');
+    const sections = document.querySelectorAll('.tools-section');
+
+    const searchTools = () => {
+      const query = searchInput.value.toLowerCase().trim();
+      
+      // Reset visibility
+      sections.forEach(section => {
+        section.style.display = 'block';
+        const cards = section.querySelectorAll('.tool-card');
+        let hasVisibleCards = false;
+
+        cards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const description = card.querySelector('p').textContent.toLowerCase();
+          const category = card.closest('.tools-grid').dataset.category.toLowerCase();
+          
+          const matches = title.includes(query) || description.includes(query) || category.includes(query);
+          card.style.display = matches ? 'flex' : 'none';
+          
+          if (matches) hasVisibleCards = true;
+        });
+
+        // Hide section if no cards are visible
+        section.style.display = hasVisibleCards ? 'block' : 'none';
+      });
+    };
+
+    searchInput.addEventListener('input', debounce(searchTools, 300));
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.className = 'dark-mode-toggle';
+    darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    const toggleDarkMode = () => {
+      const isDarkMode = document.documentElement.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+    };
+    darkModeToggle.addEventListener('click', debounce(toggleDarkMode, 100));
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+    }
+    document.body.appendChild(darkModeToggle);
+
+    // Lazy-load animation observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.tool-card, .tools-section, .search-section').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

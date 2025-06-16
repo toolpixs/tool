@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Task Suggestions Tool - Free AI-Powered Task Manager | ToolPix</title>
+  <meta name="description" content="Boost productivity with ToolPix's free Smart Task Suggestions tool. Get personalized task recommendations based on your habits, priorities, and goals. No registration required.">
+  <meta name="keywords" content="smart task suggestions, task manager, productivity tool, task management, free online tool, task prioritization, habit-based tasks, ToolPix">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ToolPix">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpix.netlify.app/smart-task-suggestions" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="Smart Task Suggestions Tool - Free AI-Powered Task Manager | ToolPix">
+  <meta property="og:description" content="Discover task suggestions tailored to your habits and goals with ToolPix's free tool. Enhance productivity effortlessly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpix.netlify.app/smart-task-suggestions">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/smart-task-suggestions-og.jpg">
+  <meta property="og:site_name" content="ToolPix">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Smart Task Suggestions Tool - ToolPix">
+  <meta name="twitter:description" content="Get personalized task suggestions to stay productive with ToolPix's free tool. No sign-up needed.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/smart-task-suggestions-twitter.jpg">
+
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Smart Task Suggestions Tool",
+    "description": "Free Smart Task Suggestions tool by ToolPix for personalized task recommendations.",
+    "url": "https://toolpix.netlify.app/smart-task-suggestions",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ToolPix",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://toolpixs.github.io/static/images/icon.png"
+      }
+    },
+    "mainEntity": {
+      "@type": "SoftwareApplication",
+      "name": "Smart Task Suggestions",
+      "applicationCategory": "Productivity Tool",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --primary: #10B981;
+      --primary-dark: #059669;
+      --primary-light: #ECFDF5;
+      --secondary: #3B82F6;
+      --secondary-dark: #2563EB;
+      --secondary-light: #EFF6FF;
+      --accent: #F59E0B;
+      --accent-dark: #D97706;
+      --text: #1F2937;
+      --text-light: #6B7280;
+      --text-lighter: #9CA3AF;
+      --bg: #F3F4F6;
+      --card-bg: #FFFFFF;
+      --border: #E5E7EB;
+      --border-light: #F3F4F6;
+      --shadow: rgba(0, 0, 0, 0.05);
+      --shadow-md: rgba(0, 0, 0, 0.1);
+      --shadow-lg: rgba(0, 0, 0, 0.15);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --transition: all 0.2s ease-in-out;
+    }
+
+    html.dark-mode {
+      --text: #F9FAFB;
+      --text-light: #D1D5DB;
+      --text-lighter: #9CA3AF;
+      --bg: #111827;
+      --card-bg: #1F2937;
+      --border: #374151;
+      --border-light: #4B5563;
+      --shadow: rgba(0, 0, 0, 0.2);
+      --shadow-md: rgba(0, 0, 0, 0.3);
+      --shadow-lg: rgba(0, 0, 0, 0.4);
+      --primary-light: #064E3B;
+      --secondary-light: #1E40AF;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light-mode) {
+        --text: #F9FAFB;
+        --text-light: #D1D5DB;
+        --text-lighter: #9CA3AF;
+        --bg: #111827;
+        --card-bg: #1F2937;
+        --border: #374151;
+        --border-light: #4B5563;
+        --shadow: rgba(0, 0, 0, 0.2);
+        --shadow-md: rgba(0, 0, 0, 0.3);
+        --shadow-lg: rgba(0, 0, 0, 0.4);
+        --primary-light: #064E3B;
+        --secondary-light: #1E40AF;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: #FFFFFF;
+      box-shadow: 0 4px 6pxpx var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+
+    .header-left, .header-center, .header-right {
+      flex: 1;
+    }
+
+    .header-center {
+      text-align: center;
+    }
+
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .search-icon-btn {
+      background: transparent;
+      border: none;
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .search-icon-btn:hover {
+      color: var(--primary-light);
+      transform: scale(1.1);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      flex: 1;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 8px var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-dark);
+    }
+
+    .search-container {
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--text);
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: var(--transition);
+    }
+
+    .search input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-lighter);
+      font-size: 1rem;
+    }
+
+    #clearSearch {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-lighter);
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      transition: var(--transition);
+    }
+
+    #clearSearch:hover {
+      color: var(--text);
+    }
+
+    .category-intro {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 6px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .category-intro h1 {
+      font-size: 1.875rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .category-intro p {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    .tool-section {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 6px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .tool-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .tool-input {
+      margin-bottom: 1.25rem;
+    }
+
+    .tool-input label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .tool-input input,
+    .tool-input select,
+    .tool-input textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .tool-input textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .tool-input input:focus,
+    .tool-input select:focus,
+    .tool-input textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .tool-output {
+      margin-top: 1.5rem;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      background: var(--card-bg);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 4px var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .task-list li:hover {
+      box-shadow: 0 4px 6px var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .task-list li .task-info {
+      flex: 1;
+    }
+
+    .task-list li .task-info h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .task-list li .task-info p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+
+    .task-list li .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    .suggested-tools {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 6px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .suggested-tools h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .tool-card .icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .tool-card h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-card p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .tool-card .btn {
+      background: var(--secondary);
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      width: 100%;
+    }
+
+    .tool-card .btn:hover {
+      background: var(--secondary-dark);
+    }
+
+    .ad-space {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 4px var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .ad-space p {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .loading-indicator {
+      text-align: center;
+      padding: 1rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      display: none;
+      animation: pulse 1.5s infinite;
+    }
+
+    .error-message {
+      text-align: center;
+      padding: 1rem;
+      color: var(--accent-dark);
+      background: var(--card-bg);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 4px var(--shadow);
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      display: none;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 4px var(--shadow);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .footer-links h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      main {
+        padding: 1.5rem 1rem;
+      }
+      .header-container {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .header-left, .header-center, .header-right {
+        flex: none;
+        text-align: center;
+        width: 100%;
+      }
+      .tools-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-title {
+        font-size: 1rem;
+      }
+      .logo {
+        font-size: 1.25rem;
+      }
+      .category-intro h1 {
+        font-size: 1.5rem;
+      }
+      .tool-section h2, .suggested-tools h2 {
+        font-size: 1.25rem;
+      }
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      .tool-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-left">
+        <a href="/" class="logo">
+          <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36">
+        </a>
+      </div>
+      <div class="header-center">
+        <span class="header-title">TOOL PIX</span>
+      </div>
+      <div class="header-right">
+        <button class="search-icon-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="category-intro">
+      <h1>Smart Task Suggestions Tool</h1>
+      <p>Maximize your productivity with ToolPix's free Smart Task Suggestions tool. Enter your habits, goals, or recent tasks to receive personalized task recommendations. Perfect for professionals, students, and anyone aiming to stay organized and efficient—no registration required.</p>
+    </section>
+
+    <!-- Ad Space 1: Banner Ad Above Tool -->
+    <div class="ad-space">
+      <p>[Ad Space: Place 728x90 or 300x250 banner ad here]</p>
+    </div>
+
+    <section class="search-container">
+      <div class="search">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="mainSearch" placeholder="Search for tasks..." aria-label="Search tasks">
+        <button type="button" id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+      </div>
+    </section>
+
+    <section class="tool-section">
+      <h2>Generate Smart Task Suggestions</h2>
+      <div class="tool-input">
+        <label for="userInput">Describe Your Recent Tasks, Habits, or Goals:</label>
+        <textarea id="userInput" rows="5" placeholder="E.g., I work on coding projects daily, want to exercise 3 times a week, and need to prepare for a meeting next week." aria-label="Enter tasks, habits, or goals"></textarea>
+      </div>
+      <div class="tool-input">
+        <label for="priority">Task Priority:</label>
+        <select id="priority" aria-label="Select task priority">
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <div class="tool-input">
+        <label for="category">Task Category:</label>
+        <select id="category" aria-label="Select task category">
+          <option value="all">All Categories</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="health">Health</option>
+          <option value="education">Education</option>
+        </select>
+      </div>
+      <button class="btn" id="generateTasks" aria-label="Generate task suggestions">Generate Suggestions</button>
+      <div class="loading-indicator" id="loadingIndicator">
+        <p>Loading task suggestions...</p>
+      </div>
+      <div class="error-message" id="errorMessage"></div>
+
+      <div class="tool-output">
+        <h3>Suggested Tasks</h3>
+        <ul class="task-list" id="taskList" aria-live="polite"></ul>
+      </div>
+    </section>
+
+    <!-- Ad Space 2: Sidebar or In-Content Ad -->
+    <div class="ad-space">
+      <p>[Ad Space: Place 300x600 or 300x250 in-content ad here]</p>
+    </div>
+
+    <section class="suggested-tools">
+      <h2>Suggested Tools for You</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-list"></i></div>
+          <h3>To-Do List</h3>
+          <p>Add, edit, prioritize, and check off tasks with due dates and tags.</p>
+          <a href="/to-do-list" class="btn" aria-label="Use To-Do List tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-stopwatch"></i></div>
+          <h3>Task Timer (Pomodoro)</h3>
+          <p>Custom work/break intervals with auto-start cycles.</p>
+          <a href="/pomodoro-timer" class="btn" aria-label="Use Task Timer tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-columns"></i></div>
+          <h3>Kanban Board</h3>
+          <p>Manage tasks with “To Do,” “In Progress,” “Done” columns.</p>
+          <a href="/kanban-board" class="btn" aria-label="Use Kanban Board tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-calendar-day"></i></div>
+          <h3>Daily Planner</h3>
+          <p>Drag-and-drop tasks into time blocks, auto-arranged by deadlines.</p>
+          <a href="/daily-planner" class="btn" aria-label="Use Daily Planner tool">Use Tool</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-intro">
+      <h2>Why Use Smart Task Suggestions?</h2>
+      <p>Our Smart Task Suggestions tool analyzes your input to deliver actionable task recommendations. Whether you're managing work projects, personal goals, or daily habits, this tool helps you stay on track. Key features include:</p>
+      <ul>
+        <li><strong>Personalized Recommendations:</strong> Tasks tailored to your habits and goals.</li>
+        <li><strong>Priority Sorting:</strong> Focus on what matters most with high, medium, or low priority options.</li>
+        <li><strong>Category Filtering:</strong> Organize tasks by work, personal, health, or education.</li>
+        <li><strong>No Sign-Up Required:</strong> Start using instantly, completely free.</li>
+      </ul>
+      <p>Boost your productivity today with ToolPix's Smart Task Suggestions tool, designed to make task management effortless and efficient.</p>
+    </section>
+
+    <!-- Ad Space 3: Bottom Banner Ad -->
+    <div class="ad-space">
+      <p>[Ad Space: Place 728x90 or 300x250 bottom banner ad here]</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="footer-logo">
+          <a href="/" class="logo">ToolPix</a>
+          <p>Free online tools for YouTube, images, productivity, code, and games</p>
+        </div>
+        <div class="social-links">
+          <a href="https://facebook.com/toolpix" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/toolpix" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/toolpix" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/company/toolpix" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://youtube.com/toolpix" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Productivity Tools</h3>
+        <ul>
+          <li><a href="/to-do-list"><i class="fas fa-list"></i> To-Do List</a></li>
+          <li><a href="/daily-planner"><i class="fas fa-calendar-day"></i> Daily Planner</a></li>
+          <li><a href="/habit-tracker"><i class="fas fa-check-circle"></i> Habit Tracker</a></li>
+          <li><a href="/pomodoro-timer"><i class="fas fa-stopwatch"></i> Task Timer (Pomodoro)</a></li>
+          <li><a href="/mind-map-creator"><i class="fas fa-project-diagram"></i> Mind Map Creator</a></li>
+          <li><a href="/kanban-board"><i class="fas fa-columns"></i> Kanban Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href=".static/sitemap.xml">Sitemap</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const searchIconBtn = document.querySelector('.search-icon-btn');
+    const searchContainer = document.querySelector('.search-container');
+    const searchInput = document.getElementById('mainSearch');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const generateTasksBtn = document.getElementById('generateTasks');
+    const taskList = document.getElementById('taskList');
+    const userInput = document.getElementById('userInput');
+    const prioritySelect = document.getElementById('priority');
+    const categorySelect = document.getElementById('category');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Simple local task suggestion model
+    const taskRules = [
+      {
+        keywords: ['coding', 'programming', 'development', 'software'],
+        suggestions: [
+          { name: 'Write 500 lines of code', priority: 'high', category: 'work' },
+          { name: 'Debug recent code changes', priority: 'medium', category: 'work' },
+          { name: 'Learn a new framework feature', priority: 'low', category: 'education' },
+          { name: 'Refactor code for optimization', priority: 'medium', category: 'work' },
+          { name: 'Attend a coding webinar', priority: 'low', category: 'education' }
+        ]
+      },
+      {
+        keywords: ['exercise', 'workout', 'fitness', 'gym', 'run'],
+        suggestions: [
+          { name: 'Go for a 30-minute run', priority: 'medium', category: 'health' },
+          { name: 'Attend a yoga class', priority: 'medium', category: 'health' },
+          { name: 'Do a 20-minute home workout', priority: 'low', category: 'health' },
+          { name: 'Plan weekly exercise schedule', priority: 'high', category: 'health' },
+          { name: 'Try a new fitness activity', priority: 'low', category: 'health' }
+        ]
+      },
+      {
+        keywords: ['meeting', 'presentation', 'conference', 'work'],
+        suggestions: [
+          { name: 'Create meeting agenda', priority: 'high', category: 'work' },
+          { name: 'Prepare presentation slides', priority: 'medium', category: 'work' },
+          { name: 'Send meeting invites', priority: 'low', category: 'work' },
+          { name: 'Review meeting notes', priority: 'medium', category: 'work' },
+          { name: 'Practice presentation delivery', priority: 'high', category: 'work' }
+        ]
+      },
+      {
+        keywords: ['study', 'learn', 'course', 'education'],
+        suggestions: [
+          { name: 'Read a chapter of study material', priority: 'high', category: 'education' },
+          { name: 'Complete an online course module', priority: 'medium', category: 'education' },
+          { name: 'Review lecture notes', priority: 'medium', category: 'education' },
+          { name: 'Join a study group session', priority: 'low', category: 'education' },
+          { name: 'Take a practice quiz', priority: 'medium', category: 'education' }
+        ]
+      },
+      {
+        keywords: [],
+        suggestions: [
+          { name: 'Plan your day', priority: 'medium', category: 'personal' },
+          { name: 'Check and respond to emails', priority: 'low', category: 'work' },
+          { name: 'Take a 10-minute break', priority: 'low', category: 'health' },
+          { name: 'Set weekly goals', priority: 'high', category: 'personal' },
+          { name: 'Organize your workspace', priority: 'medium', category: 'personal' }
+        ]
+      }
+    ];
+
+    // Local task suggestion generator
+    function generateLocalTaskSuggestions(inputText) {
+      loadingIndicator.style.display = 'block';
+      errorMessage.style.display = 'none';
+
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const normalizedInput = inputText.toLowerCase().trim();
+          let matchedSuggestions = [];
+
+          // Find matching rules based on keywords
+          for (const rule of taskRules) {
+            if (rule.keywords.length === 0 || rule.keywords.some(keyword => normalizedInput.includes(keyword))) {
+              matchedSuggestions = [...matchedSuggestions, ...rule.suggestions];
+            }
+          }
+
+          // Remove duplicates by task name
+          const uniqueSuggestions = Array.from(new Map(matchedSuggestions.map(task => [task.name, task])).values());
+
+          // Limit to 5 suggestions
+          const suggestions = uniqueSuggestions.slice(0, 5);
+
+          loadingIndicator.style.display = 'none';
+          resolve(suggestions);
+        }, 500); // Simulate processing delay for better UX
+      });
+    }
+
+    // Save task to local storage
+    function addToDoList(task) {
+      const toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+      toDoList.push({ ...task, id: Date.now() });
+      localStorage.setItem('toDoList', JSON.stringify(toDoList));
+      alert(`${task.name} added to To-Do List! Check the To-Do List tool to view.`);
+    }
+
+    // Search tasks
+    function performSearch(query) {
+      const normalizedQuery = query.toLowerCase().trim();
+      const tasks = taskList.querySelectorAll('li');
+      tasks.forEach(task => {
+        const taskName = task.querySelector('h3').textContent.toLowerCase();
+        task.style.display = taskName.includes(normalizedQuery) ? 'flex' : 'none';
+      });
+    }
+
+    // Generate task suggestions
+    async function generateTaskSuggestions(inputText, selectedPriority, selectedCategory) {
+      if (!inputText.trim()) {
+        errorMessage.textContent = 'Please enter your tasks, habits, or goals.';
+        errorMessage.style.display = 'block';
+        return;
+      }
+
+      taskList.innerHTML = '';
+      errorMessage.style.display = 'none';
+
+      const tasks = await generateLocalTaskSuggestions(inputText);
+      const filteredTasks = tasks.filter(task => {
+        const priorityMatch = selectedPriority === 'all' || task.priority.toLowerCase() === selectedPriority;
+        const categoryMatch = selectedCategory === 'all' || task.category.toLowerCase() === selectedCategory;
+        return priorityMatch && categoryMatch;
+      });
+
+      filteredTasks.forEach(task => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="task-info">
+            <h3>${task.name}</h3>
+            <p>Priority: ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)} | Category: ${task.category.charAt(0).toUpperCase() + task.category.slice(1)}</p>
+          </div>
+          <button class="btn btn-secondary add-to-do" aria-label="Add ${task.name} to To-Do list">Add to To-Do</button>
+        `;
+        const addButton = li.querySelector('.add-to-do');
+        addButton.addEventListener('click', () => addToDoList(task));
+        taskList.appendChild(li);
+      });
+
+      if (filteredTasks.length === 0) {
+        taskList.innerHTML = '<li>No suggestions match your criteria.</li>';
+      }
+    }
+
+    // Event listeners
+    searchIconBtn.addEventListener('click', () => {
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const searchContainerTop = searchContainer.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: searchContainerTop - headerHeight - 20,
+        behavior: 'smooth'
+      });
+      setTimeout(() => searchInput.focus(), 500);
+    });
+
+    searchInput.addEventListener('input', () => {
+      performSearch(searchInput.value);
+      clearSearchBtn.style.display = searchInput.value ? 'block' : 'none';
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      performSearch('');
+      clearSearchBtn.style.display = 'none';
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') performSearch(searchInput.value);
+    });
+
+    generateTasksBtn.addEventListener('click', () => {
+      generateTaskSuggestions(userInput.value, prioritySelect.value, categorySelect.value);
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    darkModeToggle.setAttribute('aria-label', 'Enable dark mode');
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '1.5rem';
+    darkModeToggle.style.right = '1.5rem';
+    darkModeToggle.style.background = 'var(--primary)';
+    darkModeToggle.style.color = '#FFFFFF';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.borderRadius = '50%';
+    darkModeToggle.style.width = '45px';
+    darkModeToggle.style.height = '45px';
+    darkModeToggle.style.display = 'flex';
+    darkModeToggle.style.alignItems = 'center';
+    darkModeToggle.style.justifyContent = 'center';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.boxShadow = '0 4px 6px var(--shadow)';
+    darkModeToggle.style.transition = 'var(--transition)';
+    darkModeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark-mode')) {
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        darkModeToggle.setAttribute('aria-label', 'Enable dark mode');
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        darkModeToggle.setAttribute('aria-label', 'Enable light mode');
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      darkModeToggle.setAttribute('aria-label', 'Enable light mode');
+    } else {
+      document.documentElement.classList.add('light-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      darkModeToggle.setAttribute('aria-label', 'Enable dark mode');
+    }
+
+    document.body.appendChild(darkModeToggle);
+  </script>
+</body>
+</html>

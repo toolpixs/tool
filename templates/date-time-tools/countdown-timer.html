@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer - ToolPix</title>
+  <meta name="description" content="Interactive countdown timer with customizable duration, pause/resume functionality, and alerts. No registration required.">
+  <meta name="keywords" content="countdown timer, timer, productivity, time management, online timer">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpix.netlify.app/countdown-timer" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="Countdown Timer - ToolPix">
+  <meta property="og:description" content="Set a customizable countdown timer with pause/resume functionality and alerts. Free and easy to use.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpix.netlify.app/countdown-timer">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/pixtime-social-share.jpg">
+  <meta property="og:site_name" content="ToolPix">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Countdown Timer - ToolPix">
+  <meta name="twitter:description" content="Set a customizable countdown timer with pause/resume functionality and alerts.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/pixtime-twitter-card.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #45a049;
+      --primary-light: #e8f5e9;
+      --secondary: #2196F3;
+      --secondary-dark: #1976D2;
+      --secondary-light: #e3f2fd;
+      --accent: #FF5722;
+      --accent-dark: #E64A19;
+      --text: #333;
+      --text-light: #666;
+      --text-lighter: #888;
+      --bg: #f4f4f4;
+      --card-bg: #fff;
+      --border: #ddd;
+      --border-light: #eee;
+      --shadow: rgba(0,0,0,0.1);
+      --shadow-md: rgba(0,0,0,0.15);
+      --shadow-lg: rgba(0,0,0,0.2);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    html.dark-mode {
+      --text: #f0f0f0;
+      --text-light: #bbb;
+      --text-lighter: #888;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --border-light: #444;
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-md: rgba(0,0,0,0.4);
+      --shadow-lg: rgba(0,0,0,0.5);
+      --primary-light: #1b5e20;
+      --secondary-light: #0d47a1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.dark-mode):not(.light-mode) {
+        --text: #f0f0f0;
+        --text-light: #bbb;
+        --text-lighter: #888;
+        --bg: #121212;
+        --card-bg: #1e1e1e;
+        --border: #333;
+        --border-light: #444;
+        --shadow: rgba(0,0,0,0.3);
+        --shadow-md: rgba(0,0,0,0.4);
+        --shadow-lg: rgba(0,0,0,0.5);
+        --primary-light: #1b5e20;
+        --secondary-light: #0d47a1;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      box-shadow: 0 2px 5px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 56px;
+      width: auto;
+    }
+
+    .header-left, .header-center, .header-right {
+      flex: 1;
+    }
+
+    .header-center { text-align: center; }
+
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .header-title {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .burger-icon, .search-icon-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0.5rem;
+      line-height: 1;
+      transition: var(--transition);
+    }
+
+    .burger-icon:hover, .search-icon-btn:hover {
+      color: var(--primary-light);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--card-bg);
+      transition: var(--transition);
+      z-index: 101;
+      box-shadow: 2px 0 10px var(--shadow);
+      overflow-y: auto;
+    }
+
+    .sidebar.open { left: 0; }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .sidebar a:hover { background: rgba(0,0,0,0.05); }
+
+    .sidebar a.active {
+      font-weight: 600;
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--primary);
+    }
+
+    .sidebar-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 1.5rem;
+    }
+
+    .sidebar-dropdown a {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .sidebar-item.has-dropdown.active .sidebar-dropdown {
+      max-height: 500px;
+    }
+
+    .sidebar-item.has-dropdown > a::after {
+      content: '+';
+      margin-left: auto;
+      transition: var(--transition);
+    }
+
+    .sidebar-item.has-dropdown.active > a::after {
+      content: '-';
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .main-container {
+      display: flex;
+      margin: 0;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .right-sidebar {
+      width: 350px;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: var(--secondary-dark); }
+
+    .timer-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 15px var(--shadow-md);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s ease;
+    }
+
+    .timer-container:hover {
+      transform: scale(1.02);
+    }
+
+    .zoom-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .zoom-icon:hover {
+      color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .timer-display {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite;
+      letter-spacing: 2px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.9; }
+      100% { opacity: 1; }
+    }
+
+    .timer-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .timer-inputs input {
+      padding: 0.5rem;
+      width: 80px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      text-align: center;
+      color: var(--text);
+      background: var(--card-bg);
+      transition: var(--transition);
+    }
+
+    .timer-inputs input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 5px var(--primary-light);
+    }
+
+    .timer-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .timer-controls button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .timer-controls button:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+
+    .timer-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      z-index: -1;
+      background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+      animation: bg-shift 10s infinite;
+    }
+
+    @keyframes bg-shift {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .timer-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--card-bg);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .timer-popup.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .timer-popup .timer-display {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+    }
+
+    .timer-popup .timer-inputs {
+      margin-bottom: 2rem;
+    }
+
+    .timer-popup .timer-controls {
+      margin-top: 2rem;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-popup:hover {
+      color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .settings-panel {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .settings-panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .widget {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .widget h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--text);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .widget-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .widget-list li {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .widget-list li:last-child { border-bottom: none; }
+
+    .widget-list a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .widget-list a:hover {
+      color: var(--secondary-dark);
+      text-decoration: underline;
+    }
+
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem 1.5rem;
+      margin-top: 3rem;
+      box-shadow: 0 -2px 5px var(--shadow);
+      width: 100%;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover { color: var(--primary); }
+
+    .footer-links h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li { margin-bottom: 0.5rem; }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .right-sidebar { display: none; }
+      .main-container { flex-direction: column; }
+      main { max-width: 100%; }
+      .timer-display { font-size: 3rem; }
+      .timer-popup .timer-display { font-size: 4rem; }
+    }
+
+    @media (max-width: 768px) {
+      main { padding: 1rem; }
+      .timer-container { padding: 1.5rem; }
+      .timer-display { font-size: 2.5rem; }
+      .timer-popup .timer-display { font-size: 3rem; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .header-container { padding: 1rem; }
+      .header-title { font-size: 1.2rem; }
+      .logo { font-size: 1.5rem; }
+      .timer-display { font-size: 2rem; }
+      .timer-popup .timer-display { font-size: 2.5rem; }
+      .footer-container { grid-template-columns: 1fr; }
+      .timer-controls button { font-size: 0.9rem; padding: 0.4rem 0.8rem; }
+      .timer-inputs input { width: 60px; font-size: 0.9rem; }
+    }
+
+    @media (min-width: 992px) {
+      .sidebar { left: 0; }
+      .main-container { margin-left: 280px; }
+      .burger-icon { display: none; }
+      .sidebar-overlay { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-left">
+        <a href="/" class="logo">
+          <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36">
+        </a>
+      </div>
+      <div class="header-center">
+        <span class="header-title">TOOL PIX</span>
+      </div>
+      <div class="header-right">
+        <button class="search-icon-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+        <button class="burger-icon" aria-label="Menu">☰</button>
+      </div>
+    </div>
+    <div class="sidebar">
+      <nav>
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        <div class="sidebar-item has-dropdown active">
+          <a href="/" class="active"><i class="fas fa-clock"></i> Time & Date Tools</a>
+          <div class="sidebar-dropdown">
+            <a href="/digital-clock"><i class="fas fa-clock"></i> Digital Clock</a>
+            <a href="/calendar"><i class="fas fa-calendar"></i> Calendar</a>
+            <a href="/world-clock"><i class="fas fa-globe"></i> World Clock</a>
+            <a href="/countdown-timer" class="active"><i class="fas fa-hourglass-half"></i> Countdown Timer</a>
+            <a href="/stopwatch"><i class="fas fa-stopwatch"></i> Stopwatch</a>
+            <a href="/date-calculator"><i class="fas fa-calculator"></i> Date Calculator</a>
+            <a href="/time-zone-converter"><i class="fas fa-sync-alt"></i> Time Zone Converter</a>
+            <a href="/alarm-clock"><i class="fas fa-bell"></i> Alarm Clock</a>
+          </div>
+        </div>
+        <a href="/all-tools"><i class="fas fa-th"></i> All Tools</a>
+      </nav>
+    </div>
+    <div class="sidebar-overlay"></div>
+  </header>
+
+  <div class="main-container">
+    <main>
+      <section class="category-intro">
+        <h1>Countdown Timer</h1>
+        <p>Set a customizable countdown timer for tasks, events, or productivity. Features pause/resume functionality and alerts when the timer completes.</p>
+      </section>
+
+      <section class="timer-container">
+        <div class="timer-background"></div>
+        <button class="zoom-icon" aria-label="Zoom timer"><i class="fas fa-expand"></i></button>
+        <div class="timer-display" id="timerDisplay">00:00:00</div>
+        <div class="timer-inputs">
+          <input type="number" id="hoursInput" min="0" placeholder="HH" aria-label="Hours">
+          <input type="number" id="minutesInput" min="0" max="59" placeholder="MM" aria-label="Minutes">
+          <input type="number" id="secondsInput" min="0" max="59" placeholder="SS" aria-label="Seconds">
+        </div>
+        <div class="timer-controls">
+          <button id="startTimer" aria-label="Start timer">Start</button>
+          <button id="pauseTimer" aria-label="Pause timer" disabled>Pause</button>
+          <button id="resetTimer" aria-label="Reset timer">Reset</button>
+        </div>
+      </section>
+
+      <div class="timer-popup" id="timerPopup">
+        <button class="close-popup" aria-label="Close popup"><i class="fas fa-times"></i></button>
+        <div class="timer-background"></div>
+        <div class="timer-display" id="popupTimerDisplay">00:00:00</div>
+        <div class="timer-inputs">
+          <input type="number" id="popupHoursInput" min="0" placeholder="HH" aria-label="Hours">
+          <input type="number" id="popupMinutesInput" min="0" max="59" placeholder="MM" aria-label="Minutes">
+          <input type="number" id="popupSecondsInput" min="0" max="59" placeholder="SS" aria-label="Seconds">
+        </div>
+        <div class="timer-controls">
+          <button id="popupStartTimer" aria-label="Start timer">Start</button>
+          <button id="popupPauseTimer" aria-label="Pause timer" disabled>Pause</button>
+          <button id="popupResetTimer" aria-label="Reset timer">Reset</button>
+        </div>
+      </div>
+
+      <section class="settings-panel">
+        <h2>Customize Your Timer</h2>
+        <p>Enter the desired duration in hours, minutes, and seconds. Start, pause, or reset the timer as needed. Use the zoom icon to view in full-screen mode.</p>
+      </section>
+    </main>
+
+    <aside class="right-sidebar">
+      <div class="widget">
+        <h3>Related Tools</h3>
+        <ul class="widget-list">
+          <li><a href="/digital-clock"><i class="fas fa-clock"></i> Digital Clock</a></li>
+          <li><a href="/world-clock"><i class="fas fa-globe"></i> World Clock</a></li>
+          <li><a href="/stopwatch"><i class="fas fa-stopwatch"></i> Stopwatch</a></li>
+          <li><a href="/time-zone-converter"><i class="fas fa-sync-alt"></i> Time Zone Converter</a></li>
+        </ul>
+      </div>
+      <div class="widget">
+        <h3>Quick Tips</h3>
+        <ul class="widget-list">
+          <li>Enter time in the input fields to set the timer duration.</li>
+          <li>Use the pause button to temporarily stop the countdown.</li>
+          <li>Reset the timer to start over with a new duration.</li>
+          <li>Click the zoom icon for a full-screen timer view.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="footer-logo">
+          <a href="/" class="logo">ToolPix</a>
+          <p>Free online tools for YouTube, images, productivity, code, and time management</p>
+        </div>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Time & Date Tools</h3>
+        <ul>
+          <li><a href="/digital-clock"><i class="fas fa-clock"></i> Digital Clock</a></li>
+          <li><a href="/calendar"><i class="fas fa-calendar"></i> Calendar</a></li>
+          <li><a href="/world-clock"><i class="fas fa-globe"></i> World Clock</a></li>
+          <li><a href="/countdown-timer"><i class="fas fa-hourglass-half"></i> Countdown Timer</a></li>
+          <li><a href="/stopwatch"><i class="fas fa-stopwatch"></i> Stopwatch</a></li>
+          <li><a href="/date-calculator"><i class="fas fa-calculator"></i> Date Calculator</a></li>
+          <li><a href="/time-zone-converter"><i class="fas fa-sync-alt"></i> Time Zone Converter</a></li>
+          <li><a href="/alarm-clock"><i class="fas fa-bell"></i> Alarm Clock</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href=".static/sitemap.xml">Sitemap</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    const burgerIcon = document.querySelector('.burger-icon');
+    const searchIconBtn = document.querySelector('.search-icon-btn');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const hoursInput = document.getElementById('hoursInput');
+    const minutesInput = document.getElementById('minutesInput');
+    const secondsInput = document.getElementById('secondsInput');
+    const startTimerBtn = document.getElementById('startTimer');
+    const pauseTimerBtn = document.getElementById('pauseTimer');
+    const resetTimerBtn = document.getElementById('resetTimer');
+    const zoomIcon = document.querySelector('.zoom-icon');
+    const timerPopup = document.getElementById('timerPopup');
+    const closePopup = document.querySelector('.close-popup');
+    const popupTimerDisplay = document.getElementById('popupTimerDisplay');
+    const popupHoursInput = document.getElementById('popupHoursInput');
+    const popupMinutesInput = document.getElementById('popupMinutesInput');
+    const popupSecondsInput = document.getElementById('popupSecondsInput');
+    const popupStartTimer = document.getElementById('popupStartTimer');
+    const popupPauseTimer = document.getElementById('popupPauseTimer');
+    const popupResetTimer = document.getElementById('popupResetTimer');
+
+    let timerInterval = null;
+    let timeLeft = 0;
+    let isPaused = false;
+
+    function updateTimerDisplay(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      timerDisplay.textContent = timeString;
+      popupTimerDisplay.textContent = timeString;
+    }
+
+    function startTimer() {
+      if (!timerInterval) {
+        const hours = parseInt(hoursInput.value) || 0;
+        const minutes = parseInt(minutesInput.value) || 0;
+        const seconds = parseInt(secondsInput.value) || 0;
+        timeLeft = hours * 3600 + minutes * 60 + seconds;
+
+        if (timeLeft <= 0) {
+          alert('Please enter a valid time.');
+          return;
+        }
+
+        updateTimerDisplay(timeLeft);
+        startTimerBtn.textContent = 'Restart';
+        popupStartTimer.textContent = 'Restart';
+        pauseTimerBtn.disabled = false;
+        popupPauseTimer.disabled = false;
+
+        timerInterval = setInterval(() => {
+          if (!isPaused) {
+            timeLeft--;
+            updateTimerDisplay(timeLeft);
+            if (timeLeft <= 0) {
+              clearInterval(timerInterval);
+              timerInterval = null;
+              alert('Timer finished!');
+              startTimerBtn.textContent = 'Start';
+              popupStartTimer.textContent = 'Start';
+              pauseTimerBtn.disabled = true;
+              popupPauseTimer.disabled = true;
+            }
+          }
+        }, 1000);
+      } else {
+        resetTimer();
+        startTimer();
+      }
+    }
+
+    function pauseTimer() {
+      isPaused = !isPaused;
+      pauseTimerBtn.textContent = isPaused ? 'Resume' : 'Pause';
+      popupPauseTimer.textContent = isPaused ? 'Resume' : 'Pause';
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timeLeft = 0;
+      isPaused = false;
+      updateTimerDisplay(0);
+      hoursInput.value = '';
+      minutesInput.value = '';
+      secondsInput.value = '';
+      popupHoursInput.value = '';
+      popupMinutesInput.value = '';
+      popupSecondsInput.value = '';
+      startTimerBtn.textContent = 'Start';
+      popupStartTimer.textContent = 'Start';
+      pauseTimerBtn.textContent = 'Pause';
+      popupPauseTimer.textContent = 'Pause';
+      pauseTimerBtn.disabled = true;
+      popupPauseTimer.disabled = true;
+    }
+
+    // Synchronize inputs between main timer and popup
+    function syncInputs(source, target1, target2, target3) {
+      target1.value = source.value;
+      target2.value = source.value;
+      target3.value = source.value;
+    }
+
+    hoursInput.addEventListener('input', () => syncInputs(hoursInput, popupHoursInput));
+    minutesInput.addEventListener('input', () => syncInputs(minutesInput, popupMinutesInput));
+    secondsInput.addEventListener('input', () => syncInputs(secondsInput, popupSecondsInput));
+    popupHoursInput.addEventListener('input', () => syncInputs(popupHoursInput, hoursInput));
+    popupMinutesInput.addEventListener('input', () => syncInputs(popupMinutesInput, minutesInput));
+    popupSecondsInput.addEventListener('input', () => syncInputs(popupSecondsInput, secondsInput));
+
+    startTimerBtn.addEventListener('click', startTimer);
+    pauseTimerBtn.addEventListener('click', pauseTimer);
+    resetTimerBtn.addEventListener('click', resetTimer);
+
+    popupStartTimer.addEventListener('click', startTimer);
+    popupPauseTimer.addEventListener('click', pauseTimer);
+    popupResetTimer.addEventListener('click', resetTimer);
+
+    // Popup open/close functionality
+    zoomIcon.addEventListener('click', () => {
+      timerPopup.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closePopup.addEventListener('click', () => {
+      timerPopup.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // Sidebar functionality
+    burgerIcon.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('active');
+      burgerIcon.textContent = sidebar.classList.contains('open') ? '×' : '☰';
+      document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+      burgerIcon.textContent = '☰';
+      document.body.style.overflow = 'auto';
+    });
+
+    document.querySelectorAll('.sidebar-item.has-dropdown > a').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        item.parentElement.classList.toggle('active');
+      });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '20px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.background = 'var(--primary)';
+    darkModeToggle.style.color = 'white';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.borderRadius = '50%';
+    darkModeToggle.style.width = '50px';
+    darkModeToggle.style.height = '50px';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.zIndex = '99';
+    darkModeToggle.style.boxShadow = '0 2px 10px var(--shadow)';
+    darkModeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark-mode')) {
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('掦dark-mode');
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else if (savedTheme === 'light') {
+      document.documentElement.classList.add('light-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        document.documentElement.classList.add('light-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    document.body.appendChild(darkModeToggle);
+  </script>
+</body>
+</html>

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer - Free Online Focus Tool | ToolPix</title>
+  <meta name="description" content="Boost focus with ToolPix's free Pomodoro timer. Customize work and break intervals, track cycles, and enhance productivity without registration. Perfect for studying or work.">
+  <meta name="keywords" content="pomodoro timer, focus timer, productivity tool, free pomodoro, online timer, task timer, time management, study timer, work focus, ToolPix">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ToolPix">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://toolpixs.github.io/pomodoro-timer" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pomodoro Timer - Free Online Focus Tool | ToolPix">
+  <meta property="og:description" content="Enhance productivity with our free Pomodoro timer. Set custom work and break intervals to stay focused. No sign-up needed.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolpixs.github.io/pomodoro-timer">
+  <meta property="og:image" content="https://toolpix.netlify.app/images/pomodoro-timer-social.jpg">
+  <meta property="og:site_name" content="ToolPix">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pomodoro Timer - ToolPix">
+  <meta name="twitter:description" content="Free Pomodoro timer to boost focus and manage time effectively. Customize intervals with no registration.">
+  <meta name="twitter:image" content="https://toolpix.netlify.app/images/pomodoro-timer-twitter.jpg">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ToolPix Pomodoro Timer",
+      "description": "A free online Pomodoro timer for boosting focus and productivity with customizable work and break intervals.",
+      "url": "https://toolpixs.github.io/pomodoro-timer",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "200"
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #45a049;
+      --primary-light: #e8f5e9;
+      --secondary: #2196F3;
+      --secondary-dark: #1976D2;
+      --secondary-light: #e3f2fd;
+      --accent: #FF5722;
+      --text: #333;
+      --text-light: #666;
+      --bg: #f4f4f4;
+      --card-bg: #fff;
+      --border: #ddd;
+      --border-light: #eee;
+      --shadow: rgba(0,0,0,0.1);
+      --shadow-md: rgba(0,0,0,0.15);
+      --radius-md: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    html.dark-mode {
+      --text: #f0f0f0;
+      --text-light: #bbb;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --border-light: #444;
+      --shadow: rgba(0,0,0,0.3);
+      --primary-light: #1b5e20;
+      --secondary-light: #0d47a1;
+      --primary: #66bb6a;
+      --border-light: #555;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.dark-mode):not(.light-mode) {
+        --text: #f0f0f0;
+        --text-light: #bbb;
+        --bg: #121212;
+        --card-bg: #1e1e1e;
+        --border: #333;
+        --border-light: #444;
+        --shadow: rgba(0,0,0,0.3);
+        --primary-light: #1b5e20;
+        --secondary-light: #0d47a1;
+        --primary: #66bb6a;
+        --border-light: #555;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      box-shadow: 0 2px 5px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 56px;
+      width: auto;
+    }
+
+    .header-title {
+      flex: 1;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: var(--secondary-dark); }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      flex: 1;
+    }
+
+    .intro {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .intro h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .intro p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .tool-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .timer-display {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .timer-progress {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      aspect-ratio: 1/1;
+    }
+
+    .timer-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .timer-progress circle {
+      fill: none;
+      stroke: var(--border-light);
+      stroke-width: 10;
+    }
+
+    .timer-progress circle.progress {
+      stroke: var(--primary);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-status {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .settings-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .settings-group label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .settings-group input {
+      width: 100%;
+      max-width: 100px;
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--text);
+      margin-top: 0.5rem;
+    }
+
+    .settings-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    .suggested-tools {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .suggested-tools h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 1px 4px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      height: 100%;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .tool-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .tool-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .tool-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .tool-card .btn {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .faq-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-item summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .faq-item summary:hover { color: var(--primary-dark); }
+
+    .faq-item p {
+      color: var(--text-light);
+      margin-top: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .ad-space {
+      background: var(--border-light);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-bottom: 2rem;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 -2px 5px var(--shadow);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-logo a {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .footer-logo p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover { color: var(--primary); }
+
+    .footer-links h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li { margin-bottom: 0.5rem; }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      main { padding: 1rem; }
+      .settings-group { grid-template-columns: 1fr; }
+      .settings-group input { max-width: 150px; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .intro h1 { font-size: 2rem; }
+      .tool-container h2, .suggested-tools h2, .faq-section h2 { font-size: 1.5rem; }
+      .timer-display { font-size: 2.5rem; }
+      .timer-progress { width: 150px; height: 150px; }
+      .timer-progress circle { stroke-width: 8; }
+      .timer-progress circle.progress { stroke-width: 8; }
+    }
+
+    @media (max-width: 576px) {
+      .header-title { font-size: 1.2rem; }
+      .logo { font-size: 1.5rem; }
+      .intro h1 { font-size: 1.8rem; }
+      .intro p { font-size: 1rem; }
+      .timer-controls { flex-direction: column; }
+      .timer-progress { width: 120px; height: 120px; }
+      .timer-progress circle { stroke-width: 6; }
+      .timer-progress circle.progress { stroke-width: 6; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        <img src="/static/images/icon.png" alt="ToolPix Logo" width="120" height="36">
+      </a>
+      <span class="header-title">Pomodoro Timer</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Ad Space: Top Banner -->
+    <div class="ad-space">
+      <!-- Insert ad code here (e.g., Google AdSense, banner ad, 728x90) -->
+      <p>Advertisement</p>
+    </div>
+
+    <section class="intro">
+      <h1>Free Online Pomodoro Timer</h1>
+      <p>Stay focused and productive with ToolPix's free Pomodoro timer. Customize work and break intervals, track cycles, and enhance your time management without any sign-up. Ideal for studying, working, or any task requiring deep focus.</p>
+    </section>
+
+    <section class="tool-container">
+      <h2>Focus with Pomodoro</h2>
+      <div class="timer-progress">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90"></circle>
+          <circle class="progress" cx="100" cy="100" r="90" style="stroke-dasharray: 565.48; stroke-dashoffset: 0;"></circle>
+        </svg>
+      </div>
+      <div class="timer-display" id="timerDisplay" aria-live="polite">25:00</div>
+      <div class="timer-status" id="timerStatus" aria-live="polite">Work Session</div>
+      <div class="timer-controls">
+        <button class="btn" id="startPauseBtn" aria-label="Start timer"><i class="fas fa-play"></i> Start</button>
+        <button class="btn btn-secondary" id="resetBtn" aria-label="Reset timer"><i class="fas fa-redo"></i> Reset</button>
+      </div>
+      <div class="settings-group">
+        <label>
+          Work (min)
+          <input type="number" id="workDuration" min="1" max="60" value="25" aria-label="Work duration in minutes">
+        </label>
+        <label>
+          Short Break (min)
+          <input type="number" id="shortBreakDuration" min="1" max="30" value="5" aria-label="Short break duration in minutes">
+        </label>
+        <label>
+          Long Break (min)
+          <input type="number" id="longBreakDuration" min="5" max="60" value="15" aria-label="Long break duration in minutes">
+        </label>
+      </div>
+    </section>
+
+    <!-- Ad Space: Mid-Content Banner -->
+    <div class="ad-space">
+      <!-- Insert ad code here (e.g., Google AdSense, banner ad, 300x250) -->
+      <p>Advertisement</p>
+    </div>
+
+    <section class="suggested-tools">
+      <h2>Suggested Tools for You</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-list"></i></div>
+          <h3>To-Do List</h3>
+          <p>Organize and prioritize tasks with due dates and tags.</p>
+          <a href="/to-do-list" class="btn btn-secondary" aria-label="Use To-Do List tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-calendar-day"></i></div>
+          <h3>Daily Planner</h3>
+          <p>Plan your day with drag-and-drop time blocks.</p>
+          <a href="/daily-planner" class="btn btn-secondary" aria-label="Use Daily Planner tool">Use Tool</a>
+        </div>
+        <div class="tool-card">
+          <div class="icon"><i class="fas fa-columns"></i></div>
+          <h3>Kanban Board</h3>
+          <p>Manage tasks visually with To-Do, In Progress, and Done columns.</p>
+          <a href="/kanban-board" class="btn btn-secondary" aria-label="Use Kanban Board tool">Use Tool</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <details class="faq-item">
+        <summary>What is the Pomodoro Technique?</summary>
+        <p>The Pomodoro Technique is a time management method that uses 25-minute work sessions followed by 5-minute breaks to boost focus and productivity. After four cycles, take a longer break (15-30 minutes).</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is ToolPix's Pomodoro timer free?</summary>
+        <p>Yes, our Pomodoro timer is completely free to use with no registration required. Access it anytime to improve your focus.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I customize the timer durations?</summary>
+        <p>Absolutely, you can set custom durations for work, short breaks, and long breaks using the input fields in the settings section.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the timer save my settings?</summary>
+        <p>Yes, your custom durations are saved in your browser's local storage, so they persist across sessions.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can I use the Pomodoro timer for studying?</summary>
+        <p>Use the Pomodoro timer to break your study sessions into 25-minute focused intervals with 5-minute breaks to maintain concentration. After four sessions, take a 15-minute break to recharge.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use the timer offline?</summary>
+        <p>Once loaded, the timer works offline as it uses local storage for settings. However, an internet connection is needed for linked tools or initial page load.</p>
+      </details>
+    </section>
+  </main>
+
+  <!-- Ad Space: Footer Banner -->
+  <div class="ad-space" style="max-width: 1200px; margin: 0 auto 2rem;">
+    <!-- Insert ad code here (e.g., Google AdSense, banner ad, 728x90) -->
+    <p>Advertisement</p>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="/" class="logo">ToolPix</a>
+        <p>Free online tools for productivity, task management, and more.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Productivity Tools</h3>
+        <ul>
+          <li><a href="/to-do-list"><i class="fas fa-list"></i> To-Do List</a></li>
+          <li><a href="/daily-planner"><i class="fas fa-calendar-day"></i> Daily Planner</a></li>
+          <li><a href="/habit-tracker"><i class="fas fa-check-circle"></i> Habit Tracker</a></li>
+          <li><a href="/kanban-board"><i class="fas fa-columns"></i> Kanban Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+          <li><a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          <li><a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ToolPix. All rights reserved.</p>
+      <a href=".static/sitemap.xml">Sitemap</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerStatus = document.getElementById('timerStatus');
+    const startPauseBtn = document.getElementById('startPauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const workDurationInput = document.getElementById('workDuration');
+    const shortBreakDurationInput = document.getElementById('shortBreakDuration');
+    const longBreakDurationInput = document.getElementById('longBreakDuration');
+    const progressCircle = document.querySelector('.timer-progress .progress');
+
+    let settings = JSON.parse(localStorage.getItem('pomodoroSettings')) || {
+      workDuration: 25,
+      shortBreakDuration: 5,
+      longBreakDuration: 15
+    };
+    let timeLeft = settings.workDuration * 60;
+    let isRunning = false;
+    let timer = null;
+    let currentMode = 'work';
+    let cycleCount = 0;
+
+    // Initialize inputs
+    workDurationInput.value = settings.workDuration;
+    shortBreakDurationInput.value = settings.shortBreakDuration;
+    longBreakDurationInput.value = settings.longBreakDuration;
+    updateTimerDisplay();
+    updateProgress(100);
+
+    startPauseBtn.addEventListener('click', toggleTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+    [workDurationInput, shortBreakDurationInput, longBreakDurationInput].forEach(input => {
+      input.addEventListener('change', () => {
+        if (!isRunning) {
+          let work = parseInt(workDurationInput.value);
+          let shortBreak = parseInt(shortBreakDurationInput.value);
+          let longBreak = parseInt(longBreakDurationInput.value);
+
+          // Validate inputs
+          settings.workDuration = Math.max(1, Math.min(60, isNaN(work) ? 25 : work));
+          settings.shortBreakDuration = Math.max(1, Math.min(30, isNaN(shortBreak) ? 5 : shortBreak));
+          settings.longBreakDuration = Math.max(5, Math.min(60, isNaN(longBreak) ? 15 : longBreak));
+
+          // Update input values to reflect validated settings
+          workDurationInput.value = settings.workDuration;
+          shortBreakDurationInput.value = settings.shortBreakDuration;
+          longBreakDurationInput.value = settings.longBreakDuration;
+
+          localStorage.setItem('pomodoroSettings', JSON.stringify(settings));
+          resetTimer();
+        }
+      });
+    });
+
+    function toggleTimer() {
+      if (isRunning) {
+        clearInterval(timer);
+        startPauseBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+        startPauseBtn.setAttribute('aria-label', 'Start timer');
+      } else {
+        timer = setInterval(updateTimer, 1000);
+        startPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+        startPauseBtn.setAttribute('aria-label', 'Pause timer');
+      }
+      isRunning = !isRunning;
+    }
+
+    function updateTimer() {
+      if (timeLeft <= 0) {
+        switchMode();
+        playSound();
+      } else {
+        timeLeft--;
+      }
+      updateTimerDisplay();
+      updateProgress((timeLeft / (getCurrentDuration() * 60)) * 100);
+    }
+
+    function switchMode() {
+      cycleCount++;
+      if (currentMode === 'work') {
+        currentMode = cycleCount % 8 === 0 ? 'longBreak' : 'shortBreak';
+        timeLeft = getCurrentDuration() * 60;
+      } else {
+        currentMode = 'work';
+        timeLeft = settings.workDuration * 60;
+      }
+      timerStatus.textContent = currentMode === 'work' ? 'Work Session' : currentMode === 'shortBreak' ? 'Short Break' : 'Long Break';
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      currentMode = 'work';
+      timeLeft = settings.workDuration * 60;
+      cycleCount = 0;
+      updateTimerDisplay();
+      updateProgress(100);
+      timerStatus.textContent = 'Work Session';
+      startPauseBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+      startPauseBtn.setAttribute('aria-label', 'Start timer');
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgress(percent) {
+      const offset = 565.48 * (1 - percent / 100);
+      progressCircle.style.strokeDashoffset = offset;
+    }
+
+    function getCurrentDuration() {
+      return currentMode === 'work' ? settings.workDuration :
+             currentMode === 'shortBreak' ? settings.shortBreakDuration : settings.longBreakDuration;
+    }
+
+    function playSound() {
+      // Try external audio first
+      const audio = new Audio('https://freesound.org/data/previews/316/316847_5234247-lq.mp3');
+      audio.play().catch(() => {
+        // Fallback to Web Audio API
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = ctx.createOscillator();
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(440, ctx.currentTime);
+          oscillator.connect(ctx.destination);
+          oscillator.start();
+          oscillator.stop(ctx.currentTime + 0.5);
+        } catch (e) {
+          console.log('Audio playback failed', e);
+        }
+      });
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    darkModeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '20px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.background = 'var(--primary)';
+    darkModeToggle.style.color = 'white';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.borderRadius = '50%';
+    darkModeToggle.style.width = '50px';
+    darkModeToggle.style.height = '50px';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.zIndex = '99';
+    darkModeToggle.style.boxShadow = '0 2px 10px var(--shadow)';
+    darkModeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark-mode')) {
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+      document.documentElement.classList.add('light-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    document.body.appendChild(darkModeToggle);
+  </script>
+</body>
+</html>
